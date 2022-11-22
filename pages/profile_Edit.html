@@ -1,5 +1,5 @@
-<script src="../js/pages/profile.js"></script>
-<link rel="stylesheet" href="../css/profile.css" />
+<script src="../js/pages/profile_Edit.js"></script>
+<link rel="stylesheet" href="../css/profile_Edit.css" />
 <script>
   function resize(obj) {
     obj.style.height = "1px";
@@ -19,7 +19,6 @@
     <form id="profile_Form" onsubmit="changeProfile(event)">
       <span id="profile_back"></span>
       <!-- 뒤로가기 -->
-
       <div id="profile_imagebar">
         <div id="profile_imgLabel">
           <img
@@ -27,9 +26,18 @@
             src="../assets/blankProfile.webp"
             alt="파일 아이콘"
           />
+          <!-- 프로필 이미지 -->
         </div>
+        <label id="profile_imgLabel_edit" for="profile_imgInput_edit"
+          >프로필 파일 수정
+          <input
+            onchange="onFileChange(event)"
+            id="profile_imgInput_edit"
+            type="file"
+            accept="images/*"
+        /></label>
       </div>
-      <!-- 프로필 이미지 (누르면 파일에서 선택 가능)-->
+      <!-- 프로필 사진 수정 -->
 
       <div id="profile_contents">
         <input
@@ -64,8 +72,10 @@
       <!-- 포스트에 있는 글 불러오기 -->
     </div>
     <div id="profile_bottombar">
-      <input id="profile_Btn" type="submit" value="프로필 변경" />
-      <!-- 프로필 변경 버튼 -->
+      <input id="profile_edit" type="submit" value="수정" />
+      <!-- 수정 -->
+      <input id="profile_cancel" type="submit" value="취소" />
+      <!-- 취소 -->
     </div>
   </section>
 </div>
