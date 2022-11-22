@@ -1,4 +1,5 @@
 import { authService } from "./firebase.js";
+import { createComment, deletePoster, updateComment, deleteComment, onEnterKey } from "./pages/poster.js";
 import { handleLocation } from "./router.js";
 
 // hash url 변경 시 처리
@@ -21,3 +22,8 @@ authService.onAuthStateChanged((user) => {
 
 // 전역 함수 리스트
 // window.route = route;
+window.deletePoster = deletePoster;
+window.createComment = createComment;
+window.updateComment = updateComment;
+window.deleteComment = deleteComment;
+window.onEnterKey = onEnterKey;

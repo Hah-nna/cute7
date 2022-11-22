@@ -1,86 +1,88 @@
-<div class="post-container"> 
+<div class="post-container">
   <div class="post-wrapper">
     <div class="post-img"></div>
     <div class="post-desc-wrapper">
       <div class="post-header">
         <div class="post-user">
-          <div class="post-user-img"></div>
-          <div class="post-nickname">닉네임</div>
+          <img id="post-user-img" src="../assets/blankProfile.webp" />
+          <div id="post-nickname">닉네임</div>
+          <div id="post-date">2022-10-31</div>
         </div>
-        <div class="post-btns">
-          <img class="comment-btn" onClick="onEdit(this);" src="../assets/edit.png" width="36" height="36" />
-          <img class="comment-btn" onClick="onDelete(this);" src="../assets/delete.png" width="36" height="36" />
+        <div id="post-btns">
+          <!-- <img class="comment-btn" onclick="updateComment();" src="../assets/edit.png" width="36" height="36" />
+          <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" /> -->
         </div>
-      </div> 
-      <div class="post-animal-name">반려동물 이름</div>
-      <div class="post-title">제목</div>
-      <div class="post-desc">설명설명설명설명설명설명설명설명설명설명설명설명설명</div>
+      </div>
+      <div id="post-animal-name">반려동물 이름</div>
+      <div id="post-title">제목</div>
+      <div id="post-desc">설명설명설명설명설명설명설명설명설명설명설명설명설명</div>
     </div>
   </div>
   <div class="comment-container">
-    <div class="comment-label">코멘트(<span>56</span>)</div>
-    <div class="comment-wrapper">
-      <div class="comment-user-img"></div>
-      <div class="comment-items">
-        <div class="comment-header">
-          <div class="comment-info">
-            <div class="comment-nickname">닉네임</div>
-            <div class="comment-date">2022-10-31</div>
+    <div class="comment-label">코멘트(<span id="comment-total">3</span>)</div>
+    <div id="comment-list">
+      <div class="comment-wrapper">
+        <img class="comment-profile" src="../assets/blankProfile.webp" />
+        <div class="comment-items">
+          <div class="comment-header">
+            <div class="comment-info">
+              <div class="comment-nickname">닉네임</div>
+              <div class="comment-date">2022-10-31</div>
+            </div>
+            <div class="comment-btns">
+              <img class="comment-btn" onclick="updateComment();" src="../assets/edit.png" width="36" height="36" />
+              <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />
+            </div>
           </div>
-          <div class="comment-btns">
-            <img class="comment-btn" onClick="onEdit(this);" src="../assets/edit.png" width="36" height="36" />
-
-            <img class="comment-btn" onClick="onDelete(this);" src="../assets/delete.png" width="36" height="36" />
+          <div class="comment-contents">
+            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
           </div>
         </div>
-        <div class="comment-contents">
-          내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+      </div>
+      <div class="comment-divider"></div>
+      <div class="comment-wrapper">
+        <img class="comment-profile" src="../assets/blankProfile.webp" />
+        <div class="comment-items">
+          <div class="comment-header">
+            <div class="comment-info">
+              <div class="comment-nickname">닉네임</div>
+              <div class="comment-date">2022-10-31</div>
+            </div>
+            <div class="comment-btns">
+              <img class="comment-btn" onclick="deleteComment();" src="../assets/edit.png" width="36" height="36" />
+              <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />
+            </div>
+          </div>
+          <div class="comment-contents">
+            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+          </div>
+        </div>
+      </div>
+      <div class="comment-divider"></div>
+      <div class="comment-wrapper">
+        <img class="comment-profile" src="../assets/blankProfile.webp" />
+        <div class="comment-items">
+          <div class="comment-header">
+            <div class="comment-info">
+              <div class="comment-nickname">닉네임</div>
+              <div class="comment-date">2022-10-31</div>
+            </div>
+            <div class="comment-btns">
+              <img class="comment-btn" onclick="onEdit();" src="../assets/edit.png" width="36" height="36" />
+              <img class="comment-btn" onclick="onDelete();" src="../assets/delete.png" width="36" height="36" />
+            </div>
+          </div>
+          <div class="comment-contents">
+            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+          </div>
         </div>
       </div>
     </div>
-    <div class="comment-divider"></div>
-    <div class="comment-wrapper">
-      <div class="comment-user-img"></div>
-      <div class="comment-items">
-        <div class="comment-header">
-          <div class="comment-info">
-            <div class="comment-nickname">닉네임</div>
-            <div class="comment-date">2022-10-31</div>
-          </div>
-          <div class="comment-btns">
-            <img class="comment-btn" onClick="onEdit(this);" src="../assets/edit.png" width="36" height="36" />
 
-            <img class="comment-btn" onClick="onDelete(this);" src="../assets/delete.png" width="36" height="36" />
-          </div>
-        </div>
-        <div class="comment-contents">
-          내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-        </div>
-      </div>
-    </div>
-    <div class="comment-divider"></div>
-    <div class="comment-wrapper">
-      <div class="comment-user-img"></div>
-      <div class="comment-items">
-        <div class="comment-header">
-          <div class="comment-info">
-            <div class="comment-nickname">닉네임</div>
-            <div class="comment-date">2022-10-31</div>
-          </div>
-          <div class="comment-btns">
-            <img class="comment-btn" onClick="onEdit(this);" src="../assets/edit.png" width="36" height="36" />
-            <img class="comment-btn" onClick="onDelete(this);" src="../assets/delete.png" width="36" height="36" />
-          </div>
-        </div>
-        <div class="comment-contents">
-          내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-        </div>
-      </div>
-    </div> 
     <div class="comment-post-wrapper">
-      <div class="comment-post-user-img"></div> 
-      <input class="comment-input" placeholder="Add a comment..."></input>
-      <img class="comment-btn" onClick="onSubmit(this);" src="../assets/send.png" width="36" height="36" />
+      <img id="comment-user-img" src="../assets/blankProfile.webp" />
+      <input id="comment-input" onkeyup="onEnterKey();" placeholder="Add a comment..." />
+      <img class="comment-create-btn" onclick="createComment" src="../assets/send.png" width="36" height="36" />
     </div>
   </div>
 </div>
