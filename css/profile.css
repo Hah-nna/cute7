@@ -1,0 +1,131 @@
+#profile_Img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+#profile_Page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile_Wrapper {
+  width: auto;
+  border: 1px solid black;
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+#profile_Wrapper > h2 {
+  text-align: center;
+}
+
+#profile_Image {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#profile_Form {
+  display: flex;
+  padding-top: 20px;
+  justify-content: space-between;
+}
+
+#profile_imgInput {
+  display: none;
+}
+
+#profile_imgLabel {
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+#profile_Btn {
+  cursor: pointer;
+}
+
+#profile_bottombar {
+  text-align: center;
+}
+
+#profile_contents {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+#profile_contents > input {
+  margin-bottom: 20%;
+}
+
+#profile_description {
+  resize: none;
+  overflow-y: hidden;
+}
+
+#profile_home {
+  float: left;
+  position: relative;
+  background: #fc664e;
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+  border-radius: 50%;
+}
+
+#profile_search {
+  margin-top: 20px;
+  float: right;
+  width: 80%;
+}
+
+#profile_mypost {
+  padding: 2px;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+}
+
+#profile_back {
+  cursor: pointer;
+  left: -30px;
+  position: relative;
+  float: left;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}
+
+#profile_back::after {
+  position: absolute;
+  content: "";
+  width: 10px; /* 사이즈 */
+  height: 10px; /* 사이즈 */
+  border-top: 5px solid #000; /* 선 두께 */
+  border-right: 5px solid #000; /* 선 두께 */
+  transform: rotate(225deg); /* 각도 */
+}
+
+#profile_topbar {
+  margin-bottom: 80px;
+}
+
+#profile_mypost > ul > li {
+  padding: 30px;
+}
+
+#profile_topbar > span {
+  position: relative;
+  top: 20px;
+  right: 22px;
+  color: white;
+}
