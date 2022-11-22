@@ -1,0 +1,70 @@
+<script src="../js/pages/profile.js"></script>
+<link rel="stylesheet" href="../css/profile.css" />
+<script>
+  function resize(obj) {
+    obj.style.height = "1px";
+    obj.style.height = 12 + obj.scrollHeight + "px";
+  }
+</script>
+
+<div id="profile_Page">
+  <section id="profile_Wrapper">
+    <div id="profile_topbar">
+      <p id="profile_home"></p>
+      <span>홈</span>
+      <!-- 홈버튼 -->
+      <input id="profile_search" type="text" placeholder="검색" />
+      <!-- 검색창 -->
+    </div>
+    <form id="profile_Form" onsubmit="changeProfile(event)">
+      <span id="profile_back"></span>
+      <!-- 뒤로가기 -->
+      <label id="profile_imgLabel" for="profile_imgInput">
+        <img id="profile_Image" src="../assets/blankProfile.webp" />
+        <input
+          onchange="onFileChange(event)"
+          id="profile_imgInput"
+          type="file"
+          accept="images/*"
+        />
+        <!-- 프로필 이미지 (누르면 파일에서 선택 가능)-->
+      </label>
+      <div id="profile_contents">
+        <input
+          id="profile_nickName"
+          type="text"
+          placeholder="닉네임"
+          value=""
+        />
+        <!-- 닉네임 -->
+        <input
+          id="profile_babyName"
+          type="text"
+          placeholder="반려동물 이름"
+          value=""
+        />
+        <!-- 반려동물 이름 -->
+        <textarea
+          id="profile_description"
+          placeholder="자기소개"
+          value=""
+          onkeydown="resize(this)"
+          onkeyup="resize(this)"
+        ></textarea>
+        <!-- 자기소개 -->
+      </div>
+    </form>
+    <div id="profile_mypost">my post</div>
+    <ul>
+      <li>글제목</li>
+      <!-- 포스트에 있는 글 불러오기 -->
+      <li>글제목</li>
+      <li>글제목</li>
+      <li>글제목</li>
+    </ul>
+    <div id="profile_bottombar">
+      <input id="profile_Btn" type="submit" value="프로필 변경" />
+      <!-- 프로필 변경 버튼 -->
+    </div>
+  </section>
+</div>
