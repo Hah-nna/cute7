@@ -28,6 +28,7 @@ export const getPosterInfo = async (docId) => {
       const { nickName, babyName, profileImage } = getUserProfile(userId);
 
       document.getElementById("comment-user-img").src = profileImage;
+
       document.getElementById("post-user-img").src = image;
       document.getElementById("post-nickname").textContent = nickName;
       document.getElementById("post-date").textContent = new Date(createdAt).toISOString().split("T")[0];
@@ -38,7 +39,7 @@ export const getPosterInfo = async (docId) => {
       const uid = authService.currentUser.uid;
       if (userId === uid) {
         const btnElement = document.getElementById("post-btns");
-        const temp_html = `<img class="comment-btn" onclick="updateComment();" src="../assets/edit.png" width="36" height="36" />
+        const temp_html = `<img class="comment-btn" onclick="editComment();" src="../assets/edit.png" width="36" height="36" />
                           <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />`;
         btnElement.append(temp_html);
       }
@@ -78,12 +79,13 @@ export const getCommentList = async (docId) => {
 
     querySnapShot.forEach((doc) => {
       const uid = authService.currentUser.uid;
+      const commentId = doc.id;
       const { userId, postId, content, createdAt } = doc.data();
       const { profileImage, nickName } = getPosterInfo(userId);
 
       const temp_html = `<img class="comment-profile" src="url(${profileImage})" />
                           <div class="comment-items">
-                            <div class="comment-header">
+                            <div id="${commentId}" class="comment-header">
                               <div class="comment-info">
                                 <div class="comment-nickname">${nickName}</div>
                                 <div class="comment-date">${new Date(createdAt).toISOString().split("T")[0]}</div>
@@ -99,6 +101,10 @@ export const getCommentList = async (docId) => {
       div.classList.add("comment-wrapper");
       div.innerHTML = temp_html;
       commentList.appendChild(div);
+
+      const divider = document.createElement("div");
+      div.classList.add("comment-divider");
+      commentList.appendChild(divider);
     });
   } catch (err) {
     console.error(err);
@@ -117,7 +123,7 @@ export const createComment = async () => {
     const updated = { userId, docId, content, createdAt: Date.now() };
     await setDoc(doc(dbService, "comment"), updated);
 
-    document.getElementById("comment-input") = ''
+    document.getElementById("comment-input").value = "";
     getCommentList();
     return alert("댓글을 등록하였습니다.");
   } catch (err) {
@@ -126,8 +132,37 @@ export const createComment = async () => {
   }
 };
 
-export const updateComment = async ({ commentId, title, content }) => {
-  if (!commentId || !title || !content) return alert("다시 시도해주세요.");
+export const editComment = (event) => {
+  const parent = event.parentNode.parentNode;
+  event.parentNode.remove();
+  const btnsElement = document.createElement("div");
+  btnsElement.classList.add("comment-btns");
+  const btns_html = `<div class="comment-edit-complete" onclick="updateComment(this);">수정완료</div>
+                    <div class="comment-edit-cancel" onclick="cancelEditComment(this);">취소</div>`;
+  btnsElement.innerHTML = btns_html;
+  parent.appendChild(btnsElement);
+
+  const parent_2 = parent.parentNode;
+  const contentsElement = parent_2.getElementsByClassName("comment-contents")[0];
+  const value = contentsElement.innerHTML.trim();
+
+  contentsElement.remove();
+  const inputElement = document.createElement("input");
+  inputElement.classList.add("comment-contents-edit");
+  inputElement.value = value;
+  parent_2.appendChild(inputElement);
+};
+
+export const cancelEditComment = (event) => {
+  getCommentList();
+};
+
+export const updateComment = async (event) => {
+  const containerEl = event.parentNode.parentNode.parentNode;
+  const commentId = containerEl.getElementsByClassName("comment-header").id;
+  const content = containerEl.getElementsByClassName("comment-contents-edit")[0].value;
+
+  if (!commentId || !content) return alert("다시 시도해주세요.");
 
   try {
     const updated = { title, content };

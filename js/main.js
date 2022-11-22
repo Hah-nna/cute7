@@ -1,5 +1,5 @@
 import { authService } from "./firebase.js";
-import { createComment, deletePoster, updateComment, deleteComment, onEnterKey } from "./pages/poster.js";
+import { createComment, deletePoster, updateComment, deleteComment, onEnterKey, editComment, cancelEditComment } from "./pages/poster.js";
 import { handleLocation } from "./router.js";
 
 // hash url 변경 시 처리
@@ -24,6 +24,8 @@ authService.onAuthStateChanged((user) => {
 // window.route = route;
 window.deletePoster = deletePoster;
 window.createComment = createComment;
+window.editComment = editComment;
+window.cancelEditComment = cancelEditComment;
 window.updateComment = updateComment;
 window.deleteComment = deleteComment;
 window.onEnterKey = onEnterKey;

@@ -9,8 +9,8 @@
           <div id="post-date">2022-10-31</div>
         </div>
         <div id="post-btns">
-          <!-- <img class="comment-btn" onclick="updateComment();" src="../assets/edit.png" width="36" height="36" />
-          <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" /> -->
+          <!-- <img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="36" height="36" />
+          <img class="comment-btn" onclick="deletePoster();" src="../assets/delete.png" width="36" height="36" /> -->
         </div>
       </div>
       <div id="post-animal-name">반려동물 이름</div>
@@ -30,8 +30,27 @@
               <div class="comment-date">2022-10-31</div>
             </div>
             <div class="comment-btns">
-              <img class="comment-btn" onclick="updateComment();" src="../assets/edit.png" width="36" height="36" />
-              <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />
+              <div class="comment-edit-complete">수정완료</div>
+              <div class="comment-edit-cancel" onclick="cancelEditComment(this);">취소</div>
+            </div>
+          </div>
+          <div class="comment-contents">
+            <input class="comment-contents-edit" placeholder="댓글을 입력하세요." />
+          </div>
+        </div>
+      </div>
+      <div class="comment-divider"></div>
+      <div class="comment-wrapper">
+        <img class="comment-profile" src="../assets/blankProfile.webp" />
+        <div class="comment-items">
+          <div class="comment-header">
+            <div class="comment-info">
+              <div class="comment-nickname">닉네임</div>
+              <div class="comment-date">2022-10-31</div>
+            </div>
+            <div class="comment-btns">
+              <img class="comment-btn" onclick="editComment(this);" src="../assets/edit.png" width="36" height="36" />
+              <img class="comment-btn" onclick="deleteComment(this);" src="../assets/delete.png" width="36" height="36" />
             </div>
           </div>
           <div class="comment-contents">
@@ -49,40 +68,20 @@
               <div class="comment-date">2022-10-31</div>
             </div>
             <div class="comment-btns">
-              <img class="comment-btn" onclick="deleteComment();" src="../assets/edit.png" width="36" height="36" />
-              <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />
+              <img class="comment-btn" onclick="editComment(this);" src="../assets/edit.png" width="36" height="36" />
+              <img class="comment-btn" onclick="deleteComment(this);" src="../assets/delete.png" width="36" height="36" />
             </div>
           </div>
-          <div class="comment-contents">
-            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-          </div>
+          <div class="comment-contents">내용3</div>
         </div>
       </div>
       <div class="comment-divider"></div>
-      <div class="comment-wrapper">
-        <img class="comment-profile" src="../assets/blankProfile.webp" />
-        <div class="comment-items">
-          <div class="comment-header">
-            <div class="comment-info">
-              <div class="comment-nickname">닉네임</div>
-              <div class="comment-date">2022-10-31</div>
-            </div>
-            <div class="comment-btns">
-              <img class="comment-btn" onclick="onEdit();" src="../assets/edit.png" width="36" height="36" />
-              <img class="comment-btn" onclick="onDelete();" src="../assets/delete.png" width="36" height="36" />
-            </div>
-          </div>
-          <div class="comment-contents">
-            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="comment-post-wrapper">
       <img id="comment-user-img" src="../assets/blankProfile.webp" />
       <input id="comment-input" onkeyup="onEnterKey();" placeholder="Add a comment..." />
-      <img class="comment-create-btn" onclick="createComment" src="../assets/send.png" width="36" height="36" />
+      <img class="comment-create-btn" onclick="createComment();" src="../assets/send.png" width="36" height="36" />
     </div>
   </div>
 </div>
