@@ -11,13 +11,15 @@
   <section id="profile_Wrapper">
     <div id="profile_topbar">
       <p id="profile_home"></p>
-      <span style="cursor: pointer">홈</span>
+      <span style="cursor: pointer" onclick="location.href='main.html'"
+        >홈</span
+      >
       <!-- 홈버튼 -->
       <input id="profile_search" type="text" placeholder="검색" />
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
-      <span id="profile_back"></span>
+      <span id="profile_back" onclick="location.href='main.html'"></span>
       <!-- 뒤로가기 -->
       <div id="profile_imagebar">
         <div id="profile_imgLabel">
@@ -74,7 +76,12 @@
     <div id="profile_bottombar">
       <input id="profile_edit" type="submit" value="수정" />
       <!-- 수정 -->
-      <input id="profile_cancel" type="submit" value="취소" />
+      <input
+        id="profile_cancel"
+        type="submit"
+        value="취소"
+        onclick="location.href='profile.html'"
+      />
       <!-- 취소 -->
     </div>
   </section>
