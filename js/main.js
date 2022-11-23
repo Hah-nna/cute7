@@ -1,5 +1,15 @@
 import { authService } from "./firebase.js";
+import {
+  createComment,
+  deletePoster,
+  updateComment,
+  deleteComment,
+  onEnterKey,
+  editComment,
+  cancelEditComment,
+} from "./pages/poster.js";
 import { handleLocation } from "./router.js";
+import { fil } from "./pages/profile_edit.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation);
@@ -9,17 +19,23 @@ document.addEventListener("DOMContentLoaded", handleLocation);
 
 // 로그인 상태 모니터링
 authService.onAuthStateChanged((user) => {
-    // Firebase 연결되면 화면 표시
-		// user === authService.currentUser 와 같은 값
-        handleLocation();
-        if (user) {
-      // 로그인 상태인 경우
-
-    } else {
-      // 로그아웃 상태인 경우
-     
-    }
-  });
+  // Firebase 연결되면 화면 표시
+  // user === authService.currentUser 와 같은 값
+  handleLocation();
+  if (user) {
+    // 로그인 상태인 경우
+  } else {
+    // 로그아웃 상태인 경우
+  }
+});
 
 // 전역 함수 리스트
-window.route = route;
+// window.route = route;
+window.deletePoster = deletePoster;
+window.createComment = createComment;
+window.editComment = editComment;
+window.cancelEditComment = cancelEditComment;
+window.updateComment = updateComment;
+window.deleteComment = deleteComment;
+window.onEnterKey = onEnterKey;
+window.fil = fil;

@@ -1,5 +1,5 @@
-<script src="../js/pages/profile.js"></script>
-<link rel="stylesheet" href="../css/profile.css" />
+<script src="../js/pages/profile_edit.js"></script>
+<link rel="stylesheet" href="../css/profile_edit.css" />
 
 <div id="profile_Page">
   <section id="profile_Wrapper">
@@ -7,7 +7,12 @@
       <p id="profile_home"></p>
       <span style="cursor: pointer" onclick="goToMain()">홈</span>
       <!-- 홈버튼 -->
-      <input id="profile_search" type="text" placeholder="검색" />
+      <input
+        onkeyup="fil()"
+        id="profile_search"
+        type="text"
+        placeholder="검색"
+      />
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
@@ -20,9 +25,18 @@
             src="../assets/blankProfile.webp"
             alt="파일 아이콘"
           />
+          <!-- 프로필 이미지 -->
         </div>
+        <label id="profile_imgLabel_edit" for="profile_imgInput_edit"
+          >프로필 파일 수정
+          <input
+            onchange="onFileChange(event)"
+            id="profile_imgInput_edit"
+            type="file"
+            accept="images/*"
+        /></label>
       </div>
-      <!-- 프로필 이미지 (누르면 파일에서 선택 가능)-->
+      <!-- 프로필 사진 수정 -->
 
       <div id="profile_contents">
         <input
@@ -50,28 +64,30 @@
     <div id="profile_mypost">my post</div>
     <!-- my post문구 -->
     <div id="profile_post_box">
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">나의 펫 한번 보여드릴게요~</div>
       </div>
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">이쁜 우리 강아지 입니다요</div>
       </div>
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">첫 나의 반려동물 ㅎㅎ</div>
       </div>
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">우리 강아지 어떤가요ㅎ</div>
       </div>
       <!-- 포스트에 있는 글 불러오기 -->
     </div>
     <div id="profile_bottombar">
+      <input id="profile_edit" type="submit" value="수정" />
+      <!-- 수정 -->
       <input
-        id="profile_Btn"
+        id="profile_cancel"
         type="button"
-        value="프로필 변경"
-        onclick="goToProfile_Edit()"
+        value="취소"
+        onclick="goToProfile()"
       />
-      <!-- 프로필 변경 버튼 -->
+      <!-- 취소 -->
     </div>
   </section>
 </div>
