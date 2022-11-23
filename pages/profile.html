@@ -5,17 +5,14 @@
   <section id="profile_Wrapper">
     <div id="profile_topbar">
       <p id="profile_home"></p>
-      <span style="cursor: pointer" onclick="location.href='main.html'"
-        >홈</span
-      >
+      <span style="cursor: pointer" onclick="goToMain()">홈</span>
       <!-- 홈버튼 -->
       <input id="profile_search" type="text" placeholder="검색" />
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
-      <span id="profile_back" onclick="location.href='main.html'"></span>
+      <span id="profile_back" onclick="goToMain()"></span>
       <!-- 뒤로가기 -->
-
       <div id="profile_imagebar">
         <div id="profile_imgLabel">
           <img
@@ -44,10 +41,10 @@
         <!-- 반려동물 이름 -->
         <textarea
           id="profile_description"
-          placeholder="자기소개"
+          placeholder="설명"
           value=""
         ></textarea>
-        <!-- 자기소개 -->
+        <!-- 설명 -->
       </div>
     </form>
     <div id="profile_mypost">my post</div>
@@ -62,9 +59,9 @@
     <div id="profile_bottombar">
       <input
         id="profile_Btn"
-        type="submit"
+        type="button"
         value="프로필 변경"
-        onclick="location.href='profile_edit.html'"
+        onclick="goToProfile_Edit()"
       />
       <!-- 프로필 변경 버튼 -->
     </div>
