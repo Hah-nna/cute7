@@ -1,8 +1,10 @@
-import { doc, getDoc, getDocs, collection, query, updateDoc, setDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-import { authService, dbService } from "../firebase.js";
+import { dbService, authService } from "../firebase.js";
+import { handleLocation } from "./router.js";
 
-//이미지, 내용, 제목 저장//
-export const savePosting = async (event) => {
+
+
+//이미지, 내용, 제목 수정
+export const editPosting = async (event) => {
     event.preventDefault();
     const posting = document.getElementById("uid");
     const { uid, imgURL, title, content } = authService.currentUser;
