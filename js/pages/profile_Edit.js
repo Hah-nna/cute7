@@ -9,14 +9,14 @@ import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 export const changeProfile = async (event) => {
   event.preventDefault();
-  document.getElementById("profile_Btn").disabled = true;
+  document.getElementById("profile_edit").disabled = true;
   const imgRef = ref(
     storageService,
     `${authService.currentUser.uid}/${uuidv4()}`
   );
-  // 이부분 프로필 수정, 취소 버튼 구현해야됨
 
-  const newNickname = document.getElementById("profile_nickName").value;
+  // 넥네임, 반려동물, 설명을 변수에 담음
+  const nickName = document.getElementById("profile_nickName").value;
   const babyName = document.getElementById("profile_babyName").value;
   const description = document.getElementById("profile_description").value;
   // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장.
@@ -27,14 +27,14 @@ export const changeProfile = async (event) => {
     downloadUrl = await getDownloadURL(response.ref);
   }
   await updateProfile(authService.currentUser, {
-    displayName: newNickname ? newNickname : null,
-    displayName: babyName ? babyName : null,
-    displayName: description ? description : null,
+    nickName: nickName ? nickName : null,
+    babyName: babyName ? babyName : null,
+    description: description ? description : null,
     photoURL: downloadUrl ? downloadUrl : null,
   })
     .then(() => {
       alert("프로필 수정 완료");
-      window.location.hash = "#fanLog";
+      window.location.hash = "#profile";
     })
     .catch((error) => {
       alert("프로필 수정 실패");
