@@ -1,25 +1,17 @@
-<script src="../js/pages/profile_Edit.js"></script>
-<link rel="stylesheet" href="../css/profile_Edit.css" />
-<script>
-  function resize(obj) {
-    obj.style.height = "1px";
-    obj.style.height = 12 + obj.scrollHeight + "px";
-  }
-</script>
+<script src="../js/pages/profile_edit.js"></script>
+<link rel="stylesheet" href="../css/profile_edit.css" />
 
 <div id="profile_Page">
   <section id="profile_Wrapper">
     <div id="profile_topbar">
       <p id="profile_home"></p>
-      <span style="cursor: pointer" onclick="location.href='main.html'"
-        >홈</span
-      >
+      <span style="cursor: pointer" onclick="goToMain()">홈</span>
       <!-- 홈버튼 -->
       <input id="profile_search" type="text" placeholder="검색" />
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
-      <span id="profile_back" onclick="location.href='main.html'"></span>
+      <span id="profile_back" onclick="goToMain()"></span>
       <!-- 뒤로가기 -->
       <div id="profile_imagebar">
         <div id="profile_imgLabel">
@@ -58,10 +50,10 @@
         <!-- 반려동물 이름 -->
         <textarea
           id="profile_description"
-          placeholder="자기소개"
+          placeholder="설명"
           value=""
         ></textarea>
-        <!-- 자기소개 -->
+        <!-- 설명 -->
       </div>
     </form>
     <div id="profile_mypost">my post</div>
@@ -78,9 +70,9 @@
       <!-- 수정 -->
       <input
         id="profile_cancel"
-        type="submit"
+        type="button"
         value="취소"
-        onclick="location.href='profile.html'"
+        onclick="goToProfile()"
       />
       <!-- 취소 -->
     </div>
