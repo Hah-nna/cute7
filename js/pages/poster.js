@@ -1,5 +1,6 @@
 import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { authService, dbService } from "../firebase.js";
+import { getYYYYMMDD } from "../util.js";
 
 const getUserProfile = async (uid) => {
   try {
@@ -9,7 +10,6 @@ const getUserProfile = async (uid) => {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   } catch (err) {
@@ -18,30 +18,37 @@ const getUserProfile = async (uid) => {
   }
 };
 
-export const getPosterInfo = async (docId) => {
+export const getPosterInfo = async (docId = "test") => {
   try {
     const docRef = doc(dbService, "post", docId);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       const { title, content, image, userId, createdAt } = docSnap.data();
-      const { nickName, babyName, profileImage } = getUserProfile(userId);
+      const { nickName, babyName, profileImage } = await getUserProfile(userId);
 
-      document.getElementById("comment-user-img").src = profileImage;
+      const uid = authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
+      const userProfileImage = getUserProfile(uid).profileImage;
 
-      document.getElementById("post-user-img").src = image;
-      document.getElementById("post-nickname").textContent = nickName;
-      document.getElementById("post-date").textContent = new Date(createdAt).toISOString().split("T")[0];
-      document.getElementById("post-animal-name").innerHTML = babyName;
-      document.getElementById("post-title").innerHTML = title;
-      document.getElementById("post-desc").innerHTML = content;
+      if (userProfileImage) document.getElementById("comment-user-img").src = userProfileImage;
+      if (image) document.getElementById("post-img").style.backgroundImage = `url(${image})`;
+      if (nickName) document.getElementById("post-nickname").textContent = nickName;
+      if (babyName) document.getElementById("post-animal-name").innerHTML = babyName;
+      if (createdAt) document.getElementById("post-date").textContent = getYYYYMMDD(createdAt);
+      if (profileImage) document.getElementById("post-user-img").src = profileImage;
+      if (title) document.getElementById("post-title").innerHTML = title;
+      if (content) document.getElementById("post-desc").innerHTML = content;
 
-      const uid = authService.currentUser.uid;
       if (userId === uid) {
-        const btnElement = document.getElementById("post-btns");
-        const temp_html = `<img class="comment-btn" onclick="editComment();" src="../assets/edit.png" width="36" height="36" />
-                          <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />`;
-        btnElement.append(temp_html);
+        const btnElement = document.getElementsByClassName("post-header")[0];
+        if (btnElement.children.length < 2) {
+          const div = document.createElement("div");
+          div.id = "post-btns";
+          const temp_html = `<img class="comment-btn" onclick="editComment();" src="../assets/edit.png" width="36" height="36" />
+                              <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />`;
+          div.innerHTML = temp_html;
+          btnElement.appendChild(div);
+        }
       }
     } else {
       console.log("No such document!");
@@ -66,45 +73,42 @@ export const deletePoster = async (docId) => {
   }
 };
 
-export const getCommentList = async (docId) => {
-  try {
-    const commentList = document.getElementById("comment-list");
-    commentList.innerHTML = "";
+export const getCommentList = async () => {
+  const commentList = document.getElementById("comment-list");
+  commentList.innerHTML = "";
+  const docId = "test"; //test
+  // const docId = sessionStorage.getItem("docId");
 
+  try {
     const docRef = collection(dbService, "comment");
     const q = query(docRef, where("postId", "==", docId));
     const querySnapShot = await getDocs(q);
 
     document.getElementById("comment-total").textContent = querySnapShot.size;
 
-    querySnapShot.forEach((doc) => {
-      const uid = authService.currentUser.uid;
+    querySnapShot.forEach(async (doc) => {
       const commentId = doc.id;
       const { userId, postId, content, createdAt } = doc.data();
-      const { profileImage, nickName } = getPosterInfo(userId);
-
-      const temp_html = `<img class="comment-profile" src="url(${profileImage})" />
-                          <div class="comment-items">
-                            <div id="${commentId}" class="comment-header">
-                              <div class="comment-info">
-                                <div class="comment-nickname">${nickName}</div>
-                                <div class="comment-date">${new Date(createdAt).toISOString().split("T")[0]}</div>
-                              </div>
-                              ${
-                                uid === userId ??
-                                '<div class="comment-btns"><img class="comment-btn" onclick="onEdit();" src="../assets/edit.png" width="36" height="36" /><img class="comment-btn" onclick="onDelete();" src="../assets/delete.png" width="36" height="36" /></div>'
-                              } 
+      const { profileImage, nickName } = await getUserProfile(userId);
+      const temp_html = `<img class="comment-profile" src="${profileImage}" />
+                        <div id="${commentId}" class="comment-items">
+                          <div class="comment-header">
+                            <div class="comment-info">
+                              <div class="comment-nickname">${nickName}</div>
+                              <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
                             </div>
-                            <div class="comment-contents">${content}</div>
-                          </div>`;
+                            <div class="comment-btns">
+                              <img class="comment-btn" onclick="editComment(this);" src="../assets/edit.png" width="36" height="36" />
+                              <img class="comment-btn" onclick="deleteComment(this);" src="../assets/delete.png" width="36" height="36" />
+                            </div>
+                          </div>
+                          <div class="comment-contents">${content}</div>
+                        </div>`;
+
       const div = document.createElement("div");
       div.classList.add("comment-wrapper");
       div.innerHTML = temp_html;
       commentList.appendChild(div);
-
-      const divider = document.createElement("div");
-      div.classList.add("comment-divider");
-      commentList.appendChild(divider);
     });
   } catch (err) {
     console.error(err);
@@ -158,29 +162,33 @@ export const cancelEditComment = (event) => {
 };
 
 export const updateComment = async (event) => {
-  const containerEl = event.parentNode.parentNode.parentNode;
-  const commentId = containerEl.getElementsByClassName("comment-header").id;
-  const content = containerEl.getElementsByClassName("comment-contents-edit")[0].value;
+  const containerElement = event.parentNode.parentNode.parentNode;
+  const commentId = containerElement.id;
+  const content = containerElement.getElementsByClassName("comment-contents-edit")[0].value;
 
   if (!commentId || !content) return alert("다시 시도해주세요.");
 
   try {
-    const updated = { title, content };
+    const updated = { content };
     const docRef = doc(dbService, "comment", commentId);
-    const updateTimestamp = await updateDoc(docRef, updated);
+    await updateDoc(docRef, updated);
     getCommentList();
-    if (updateTimestamp) return alert("댓글을 수정하였습니다.");
+    return alert("댓글을 수정하였습니다.");
   } catch (err) {
     console.error(err);
     return alert("다시 시도해주세요.");
   }
 };
 
-export const deleteComment = async (commentId) => {
+export const deleteComment = async (event) => {
+  if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
+
+  const commentId = event.parentNode.parentNode.parentNode.id;
   if (!commentId) return alert("다시 시도해주세요.");
 
   try {
     await deleteDoc(doc(dbService, "comment", commentId));
+    getCommentList();
     return alert("댓글을 삭제하였습니다.");
   } catch (err) {
     console.error(err);
