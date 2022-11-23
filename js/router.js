@@ -11,6 +11,8 @@ const routes = {
   page1: "/pages/page1.html",
   poster: "/pages/poster.html",
   404: "/pages/404.html",
+  profile: "/pages/profile.html",
+  profile_edit: "/pages/profile_edit.html",
 };
 
 export const handleLocation = async () => {
@@ -32,4 +34,16 @@ export const handleLocation = async () => {
     getPosterInfo();
     getCommentList();
   }
+};
+
+export const goToMain = () => {
+  window.location.hash = "#main";
+};
+
+export const goToProfile = () => {
+  window.location.hash = "#profile";
+};
+
+export const goToProfile_Edit = () => {
+  window.location.hash = "#profile_edit";
 };
