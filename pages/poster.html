@@ -1,6 +1,6 @@
 <div class="post-container">
   <div class="post-wrapper">
-    <div class="post-img"></div>
+    <div id="post-img"></div>
     <div class="post-desc-wrapper">
       <div class="post-header">
         <div class="post-user">
@@ -8,20 +8,20 @@
           <div id="post-nickname">닉네임</div>
           <div id="post-date">2022-10-31</div>
         </div>
-        <div id="post-btns">
-          <!-- <img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="36" height="36" />
+        <!-- <div id="post-btns"> -->
+        <!-- <img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="36" height="36" />
           <img class="comment-btn" onclick="deletePoster();" src="../assets/delete.png" width="36" height="36" /> -->
-        </div>
+        <!-- </div> -->
       </div>
       <div id="post-animal-name">반려동물 이름</div>
-      <div id="post-title">제목</div>
-      <div id="post-desc">설명설명설명설명설명설명설명설명설명설명설명설명설명</div>
+      <div id="post-title">title</div>
+      <div id="post-desc">content</div>
     </div>
   </div>
   <div class="comment-container">
-    <div class="comment-label">코멘트(<span id="comment-total">3</span>)</div>
+    <div class="comment-label">코멘트(<span id="comment-total"></span>)</div>
     <div id="comment-list">
-      <div class="comment-wrapper">
+      <!-- <div class="comment-wrapper">
         <img class="comment-profile" src="../assets/blankProfile.webp" />
         <div class="comment-items">
           <div class="comment-header">
@@ -39,7 +39,6 @@
           </div>
         </div>
       </div>
-      <div class="comment-divider"></div>
       <div class="comment-wrapper">
         <img class="comment-profile" src="../assets/blankProfile.webp" />
         <div class="comment-items">
@@ -58,7 +57,6 @@
           </div>
         </div>
       </div>
-      <div class="comment-divider"></div>
       <div class="comment-wrapper">
         <img class="comment-profile" src="../assets/blankProfile.webp" />
         <div class="comment-items">
@@ -74,10 +72,8 @@
           </div>
           <div class="comment-contents">내용3</div>
         </div>
-      </div>
-      <div class="comment-divider"></div>
+      </div> -->
     </div>
-
     <div class="comment-post-wrapper">
       <img id="comment-user-img" src="../assets/blankProfile.webp" />
       <input id="comment-input" onkeyup="onEnterKey();" placeholder="Add a comment..." />
