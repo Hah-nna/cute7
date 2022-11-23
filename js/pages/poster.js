@@ -1,4 +1,4 @@
-import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, setDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
@@ -81,7 +81,7 @@ export const getCommentList = async () => {
 
   try {
     const docRef = collection(dbService, "comment");
-    const q = query(docRef, where("postId", "==", docId));
+    const q = query(docRef, where("postId", "==", docId), orderBy("createdAt"));
     const querySnapShot = await getDocs(q);
 
     document.getElementById("comment-total").textContent = querySnapShot.size;
@@ -116,16 +116,17 @@ export const getCommentList = async () => {
   }
 };
 
-export const createComment = async () => {
+export const createComment = async (event) => {
   const inputElement = document.getElementById("comment-input");
   const content = inputElement.value;
   if (!content) return alert("댓글을 입력해주세요.");
 
   try {
-    const userId = authService.currentUser.uid;
-    const docId = sessionStorage.getItem("docId");
-    const updated = { userId, docId, content, createdAt: Date.now() };
-    await setDoc(doc(dbService, "comment"), updated);
+    const userId = authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2";
+    // const postId = sessionStorage.getItem("docId");
+    const postId = "test";
+    const updated = { userId, postId, content, createdAt: Date.now() };
+    await setDoc(doc(collection(dbService, "comment")), updated);
 
     document.getElementById("comment-input").value = "";
     getCommentList();
