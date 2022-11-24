@@ -1,5 +1,6 @@
 import { authService } from "./firebase.js";
 import { getCommentList, getPosterInfo } from "./pages/poster.js";
+import { addsign } from "./pages/auth.js";
 
 export const route = (event) => {
   event.preventDefault();
@@ -7,13 +8,13 @@ export const route = (event) => {
 };
 
 const routes = {
-  "/": "/pages/main.html",
+  "/": "/pages/auth.html",
+  auth: "/pages/auth.html",
   page1: "/pages/page1.html",
   poster: "/pages/poster.html",
   404: "/pages/404.html",
   profile: "/pages/profile.html",
   profile_edit: "/pages/profile_edit.html",
-  auth: "/pages/auth.html"
 };
 
 export const handleLocation = async () => {
@@ -47,7 +48,16 @@ export const handleLocation = async () => {
     document.getElementById("profile_description").placeholder =
       authService.currentUser.displayName ?? "설명";
   }
+
+  if (path === "auth" || path === "/") { 
+    
+    addsign()
+
+  }
+  
 };
+
+//클릭 페이지 이동
 
 export const goToMain = () => {
   window.location.hash = "/";
@@ -64,3 +74,4 @@ export const goToProfile_Edit = () => {
 export const goToPost = () => {
   window.location.hash = "#poster";
 };
+
