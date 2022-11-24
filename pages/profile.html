@@ -7,7 +7,12 @@
       <p id="profile_home"></p>
       <span style="cursor: pointer" onclick="goToMain()">홈</span>
       <!-- 홈버튼 -->
-      <input id="profile_search" type="text" placeholder="검색" />
+      <input
+        onkeyup="fil()"
+        id="profile_search"
+        type="text"
+        placeholder="검색"
+      />
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
@@ -50,17 +55,17 @@
     <div id="profile_mypost">my post</div>
     <!-- my post문구 -->
     <div id="profile_post_box">
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">나의 펫 한번 보여드릴게요~</div>
       </div>
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">이쁜 우리 강아지 입니다요</div>
       </div>
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">첫 나의 반려동물 ㅎㅎ</div>
       </div>
-      <div id="ada">
-        <div id="profile_post">글제목 클릭하면 글로 이동</div>
+      <div class="profile_post_side">
+        <div class="profile_post">우리 강아지 어떤가요ㅎ</div>
       </div>
       <!-- 포스트에 있는 글 불러오기 -->
     </div>
