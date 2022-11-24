@@ -1,4 +1,19 @@
+<<<<<<< HEAD
 import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, setDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+=======
+import {
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  deleteDoc,
+  updateDoc,
+  setDoc,
+  orderBy,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+>>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
@@ -27,6 +42,7 @@ export const getPosterInfo = async (docId = "test") => {
       const { title, content, image, userId, createdAt } = docSnap.data();
       const { nickName, babyName, profileImage } = await getUserProfile(userId);
 
+<<<<<<< HEAD
       const uid = authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
       const userProfileImage = getUserProfile(uid).profileImage;
 
@@ -36,6 +52,27 @@ export const getPosterInfo = async (docId = "test") => {
       if (babyName) document.getElementById("post-animal-name").innerHTML = babyName;
       if (createdAt) document.getElementById("post-date").textContent = getYYYYMMDD(createdAt);
       if (profileImage) document.getElementById("post-user-img").src = profileImage;
+=======
+      const uid =
+        authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
+      const userProfileImage = getUserProfile(uid).profileImage;
+
+      if (userProfileImage)
+        document.getElementById("comment-user-img").src = userProfileImage;
+      if (image)
+        document.getElementById(
+          "post-img"
+        ).style.backgroundImage = `url(${image})`;
+      if (nickName)
+        document.getElementById("post-nickname").textContent = nickName;
+      if (babyName)
+        document.getElementById("post-animal-name").innerHTML = babyName;
+      if (createdAt)
+        document.getElementById("post-date").textContent =
+          getYYYYMMDD(createdAt);
+      if (profileImage)
+        document.getElementById("post-user-img").src = profileImage;
+>>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
       if (title) document.getElementById("post-title").innerHTML = title;
       if (content) document.getElementById("post-desc").innerHTML = content;
 
@@ -97,7 +134,13 @@ export const getCommentList = async () => {
                             <div class="comment-header">
                               <div class="comment-info">
                                 <div class="comment-nickname">${nickName}</div>
+<<<<<<< HEAD
                                 <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
+=======
+                                <div class="comment-date">${getYYYYMMDD(
+                                  createdAt
+                                )}</div>
+>>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
                               </div>
                               <div class="comment-btns">
                                 <img class="comment-btn" onclick="editComment(this);" src="../assets/edit.png" width="36" height="36" />
@@ -124,7 +167,12 @@ export const createComment = async (event) => {
   if (!content) return alert("댓글을 입력해주세요.");
 
   try {
+<<<<<<< HEAD
     const userId = authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2";
+=======
+    const userId =
+      authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2";
+>>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
     // const postId = sessionStorage.getItem("docId");
     const postId = "test";
     const updated = { userId, postId, content, createdAt: Date.now() };
@@ -150,7 +198,12 @@ export const editComment = (event) => {
   parent.appendChild(btnsElement);
 
   const parent_2 = parent.parentNode;
+<<<<<<< HEAD
   const contentsElement = parent_2.getElementsByClassName("comment-contents")[0];
+=======
+  const contentsElement =
+    parent_2.getElementsByClassName("comment-contents")[0];
+>>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
   const value = contentsElement.innerHTML.trim();
 
   contentsElement.remove();
@@ -167,7 +220,13 @@ export const cancelEditComment = (event) => {
 export const updateComment = async (event) => {
   const containerElement = event.parentNode.parentNode.parentNode;
   const commentId = containerElement.id;
+<<<<<<< HEAD
   const content = containerElement.getElementsByClassName("comment-contents-edit")[0].value;
+=======
+  const content = containerElement.getElementsByClassName(
+    "comment-contents-edit"
+  )[0].value;
+>>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
 
   if (!commentId || !content) return alert("다시 시도해주세요.");
 

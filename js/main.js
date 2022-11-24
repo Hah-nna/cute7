@@ -1,5 +1,15 @@
 import { authService } from "./firebase.js";
-import { handleLocation } from "./router.js";
+import {
+  createComment,
+  deletePoster,
+  updateComment,
+  deleteComment,
+  onEnterKey,
+  editComment,
+  cancelEditComment,
+} from "./pages/poster.js";
+import { handleLocation, goToProfile, goToPost } from "./router.js";
+import { fil } from "./pages/profile_edit.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation);
@@ -20,4 +30,18 @@ authService.onAuthStateChanged((user) => {
 });
 
 // 전역 함수 리스트
+<<<<<<< HEAD
 window.route = route;
+=======
+// window.route = route;
+window.deletePoster = deletePoster;
+window.createComment = createComment;
+window.editComment = editComment;
+window.cancelEditComment = cancelEditComment;
+window.updateComment = updateComment;
+window.deleteComment = deleteComment;
+window.onEnterKey = onEnterKey;
+window.fil = fil;
+window.goToProfile = goToProfile;
+window.goToPost = goToPost;
+>>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
