@@ -17,8 +17,9 @@ import {
 } from "./router.js";
 import { fil, onFileChange, changeProfile } from "./pages/profile_edit.js";
 
-
-import {toggle,setTimeout1}from "./pages/auth.js";
+import{ 
+   toggle,
+} from "./pages/auth.js";
 
 
 
@@ -57,4 +58,4 @@ window.changeProfile = changeProfile;
 window.goToProfile_Edit = goToProfile_Edit;
 window.goToMain = goToMain;
 window.toggle = toggle;
-window.setTimeout1 = setTimeout1;
+
