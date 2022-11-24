@@ -8,7 +8,7 @@ import {
   editComment,
   cancelEditComment,
 } from "./pages/poster.js";
-import { handleLocation } from "./router.js";
+import { handleLocation, goToProfile, goToPost } from "./router.js";
 import { fil } from "./pages/profile_edit.js";
 
 // hash url 변경 시 처리
@@ -39,3 +39,5 @@ window.updateComment = updateComment;
 window.deleteComment = deleteComment;
 window.onEnterKey = onEnterKey;
 window.fil = fil;
+window.goToProfile = goToProfile;
+window.goToPost = goToPost;

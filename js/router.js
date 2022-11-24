@@ -47,3 +47,7 @@ export const goToProfile = () => {
 export const goToProfile_Edit = () => {
   window.location.hash = "#profile_edit";
 };
+
+export const goToPost = () => {
+  window.location.hash = "#poster";
+};
