@@ -30,9 +30,6 @@ authService.onAuthStateChanged((user) => {
 });
 
 // 전역 함수 리스트
-<<<<<<< HEAD
-window.route = route;
-=======
 // window.route = route;
 window.deletePoster = deletePoster;
 window.createComment = createComment;
@@ -44,4 +41,3 @@ window.onEnterKey = onEnterKey;
 window.fil = fil;
 window.goToProfile = goToProfile;
 window.goToPost = goToPost;
->>>>>>> 711b671a6533893d7c9e1e6096cb7927a11956d4
