@@ -146,7 +146,7 @@ export const editComment = (commentId) => {
   const btnsElement = document.createElement("div");
   btnsElement.classList.add("comment-btns");
   const btns_html = `<div class="comment-edit-complete" onclick="updateComment('${commentId}');">수정완료</div>
-                    <div class="comment-edit-cancel" onclick="cancelEditComment('${commentId}');">취소</div>`;
+                    <div class="comment-edit-cancel" onclick="cancelEditComment();">취소</div>`;
   btnsElement.innerHTML = btns_html;
   parent.appendChild(btnsElement);
 
@@ -161,7 +161,7 @@ export const editComment = (commentId) => {
   parent_2.appendChild(inputElement);
 };
 
-export const cancelEditComment = (event) => {
+export const cancelEditComment = () => {
   getCommentList();
 };
 
