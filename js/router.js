@@ -1,4 +1,5 @@
 import { authService } from "./firebase.js";
+import { getPostList } from "./pages/cutemain.js";
 import { getCommentList, getPosterInfo } from "./pages/poster.js";
 
 export const route = (event) => {
@@ -33,6 +34,10 @@ export const handleLocation = async () => {
     // document.getElementById("post-nickname").textContent = authService.currentUser?.displayName ?? "닉네임 없음";
     getPosterInfo();
     getCommentList();
+  }
+
+  if (path === "/") {
+    getPostList();
   }
 };
 

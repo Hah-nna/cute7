@@ -13,7 +13,7 @@ import {
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
-const getUserProfile = async (uid) => {
+export const getUserProfile = async (uid) => {
   try {
     const docRef = doc(dbService, "profile", uid);
     const docSnap = await getDoc(docRef);
