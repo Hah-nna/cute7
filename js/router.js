@@ -34,10 +34,22 @@ export const handleLocation = async () => {
     getPosterInfo();
     getCommentList();
   }
+
+  if (path === "profile" || path === "profile_edit") {
+    // 프로필, 프로필수정 화면 일 때 현재 프로필 사진과 닉네임, 반려동물, 설명 할당
+    document.getElementById("profile_Image").src =
+      authService.currentUser.photoURL ?? "/assets/blankProfile.webp";
+    document.getElementById("profile_nickName").placeholder =
+      authService.currentUser.displayName ?? "닉네임";
+    document.getElementById("profile_babyName").placeholder =
+      authService.currentUser.displayName ?? "반려동물 이름";
+    document.getElementById("profile_description").placeholder =
+      authService.currentUser.displayName ?? "설명";
+  }
 };
 
 export const goToMain = () => {
-  window.location.hash = "#main";
+  window.location.hash = "/";
 };
 
 export const goToProfile = () => {

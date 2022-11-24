@@ -8,8 +8,14 @@ import {
   editComment,
   cancelEditComment,
 } from "./pages/poster.js";
-import { handleLocation, goToProfile, goToPost } from "./router.js";
-import { fil } from "./pages/profile_edit.js";
+import {
+  handleLocation,
+  goToProfile,
+  goToPost,
+  goToProfile_Edit,
+  goToMain,
+} from "./router.js";
+import { fil, onFileChange, changeProfile } from "./pages/profile_edit.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation);
@@ -41,3 +47,7 @@ window.onEnterKey = onEnterKey;
 window.fil = fil;
 window.goToProfile = goToProfile;
 window.goToPost = goToPost;
+window.onFileChange = onFileChange;
+window.changeProfile = changeProfile;
+window.goToProfile_Edit = goToProfile_Edit;
+window.goToMain = goToMain;
