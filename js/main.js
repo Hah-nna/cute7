@@ -32,6 +32,7 @@ window.cancelEditComment = cancelEditComment;
 window.updateComment = updateComment;
 window.deleteComment = deleteComment;
 window.onEnterKey = onEnterKey;
+
 window.fil = fil;
 window.goToProfile = goToProfile;
 window.goToPostWriting = goToPostWriting;
