@@ -1,7 +1,7 @@
 import { authService } from "./firebase.js";
 import { createComments, deletePoster, updateComment, deleteComment, onEnterKey, editComment, cancelEditComment, getUserProfile, updatePoster } from "./pages/poster.js";
 import { handleLocation, goToProfile, goToPostWriting, goToMain, goToProfile_Edit } from "./router.js";
-import { clickPost } from "./pages/cutemain.js";
+import { clickPost, fill } from "./pages/cutemain.js";
 
 import { onFileChange, fil, changeProfile } from "./pages/profile_edit.js";
 // hash url 변경 시 처리
@@ -34,6 +34,7 @@ window.deleteComment = deleteComment;
 window.onEnterKey = onEnterKey;
 
 window.fil = fil;
+window.fill = fill;
 window.goToProfile = goToProfile;
 window.goToPostWriting = goToPostWriting;
 window.onFileChange = onFileChange;

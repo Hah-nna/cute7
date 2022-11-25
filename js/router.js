@@ -1,7 +1,11 @@
 import { authService } from "./firebase.js";
 import { getPostList } from "./pages/cutemain.js";
 import { getCommentList, getPosterInfo } from "./pages/poster.js";
-import { getProfileInfo, getProfilePostList } from "./pages/profile_edit.js";
+import {
+  getProfileInfo,
+  getProfilePostList,
+  fil,
+} from "./pages/profile_edit.js";
 
 export const route = (event) => {
   event.preventDefault();
