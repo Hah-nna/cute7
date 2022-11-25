@@ -1,4 +1,17 @@
-import { authService, storageService } from "../firebase.js";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  deleteDoc,
+  updateDoc,
+  setDoc,
+  orderBy,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+
+import { authService, storageService, dbService } from "../firebase.js";
 import {
   ref,
   uploadString,
@@ -7,6 +20,53 @@ import {
 import { updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 ///
+
+const getUserProfile = async (uid) => {
+  try {
+    const docRef = doc(dbService, "profile", uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      console.log("No such document!");
+    }
+  } catch (err) {
+    console.error(err);
+    return alert("다시 시도해주세요");
+  }
+};
+
+export const getProfileInfo = async (docId = "test") => {
+  try {
+    const docRef = doc(dbService, "post", docId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const { title, content, image, userId, createdAt } = docSnap.data();
+      const { nickName, babyName, profileImage, description } =
+        await getUserProfile(userId);
+
+      const uid =
+        authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
+
+      if (nickName)
+        document.getElementById("profile_nickName").value = nickName;
+      if (babyName)
+        document.getElementById("profile_babyName").value = babyName;
+      if (description)
+        document.getElementById("profile_description").value = description;
+      if (profileImage)
+        document.getElementById("profile_Image").src = profileImage;
+    } else {
+      console.log("No such document!");
+    }
+  } catch (err) {
+    console.error(err);
+    return alert("다시 시도해주세요.");
+  }
+};
+
 ///
 ///
 ///
@@ -70,7 +130,6 @@ export const onFileChange = (event) => {
 //-------------   검색기능 구현   ------------    //
 
 export function fil() {
-  console.log("불러온다~~");
   let value, contents, item, i;
 
   value = document.getElementById("profile_search").value;
