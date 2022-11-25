@@ -15,6 +15,7 @@ const routes = {
   404: "/pages/404.html",
   profile: "/pages/profile.html",
   profile_edit: "/pages/profile_edit.html",
+  post_writing: "/pages/post_writing.html",
 };
 
 export const handleLocation = async () => {
@@ -62,4 +63,8 @@ export const goToPost = () => {
 
 export const goToPostId = () => {
   window.location.hash = "#poster";
+};
+
+export const goToPostWriting = () => {
+  window.location.hash = "#post_writing";
 };
