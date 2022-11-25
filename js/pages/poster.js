@@ -13,6 +13,8 @@ import {
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
+const testUid = "dYJBEhst3GYk8edYSjy4DhKQp2s2";
+
 export const getUserProfile = async (uid) => {
   try {
     const docRef = doc(dbService, "profile", uid);
@@ -29,8 +31,10 @@ export const getUserProfile = async (uid) => {
   }
 };
 
-export const getPosterInfo = async (docId = "test") => {
+export const getPosterInfo = async () => {
   try {
+    const docId = sessionStorage.getItem("docId");
+    // const docId = "test"; //test
     const docRef = doc(dbService, "post", docId);
     const docSnap = await getDoc(docRef);
 
@@ -38,8 +42,7 @@ export const getPosterInfo = async (docId = "test") => {
       const { title, content, image, userId, createdAt } = docSnap.data();
       const { nickName, babyName, profileImage } = await getUserProfile(userId);
 
-      const uid =
-        authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
+      const uid = authService.currentUser?.uid || testUid; //test
       const userProfileImage = getUserProfile(uid).profileImage;
 
       if (userProfileImage)
@@ -75,8 +78,9 @@ export const getPosterInfo = async (docId = "test") => {
       console.log("No such document!");
     }
   } catch (err) {
-    console.error(err);
-    return alert("다시 시도해주세요.");
+    console.error(1, err);
+    alert("다시 시도해주세요.");
+    return history.back();
   }
 };
 
@@ -98,8 +102,8 @@ export const deletePoster = async () => {
 export const getCommentList = async () => {
   const commentList = document.getElementById("comment-list");
   commentList.innerHTML = "";
-  const docId = "test"; //test
-  // const docId = sessionStorage.getItem("docId");
+  // const docId = "test"; //test
+  const docId = sessionStorage.getItem("docId");
 
   try {
     const docRef = collection(dbService, "comment");
@@ -114,7 +118,7 @@ export const getCommentList = async () => {
       const { profileImage, nickName } = await getUserProfile(userId);
       const temp_html = `<div class="comment-wrapper">
                           <img class="comment-profile" src="${profileImage}" />
-                          <div id="${commentId}" class="comment-items">
+                          <div class="comment-items">
                             <div class="comment-header">
                               <div class="comment-info">
                                 <div class="comment-nickname">${nickName}</div>
@@ -123,8 +127,8 @@ export const getCommentList = async () => {
                                 )}</div>
                               </div>
                               <div class="comment-btns">
-                                <img class="comment-btn" onclick="editComment(this);" src="../assets/edit.png" width="36" height="36" />
-                                <img class="comment-btn" onclick="deleteComment(this);" src="../assets/delete.png" width="36" height="36" />
+                                <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
+                                <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="36" height="36" />
                               </div>
                             </div>
                             <div class="comment-contents">${content}</div>
@@ -141,16 +145,16 @@ export const getCommentList = async () => {
   }
 };
 
-export const createComment = async (event) => {
+export const createComments = async (e) => {
+  console.log(1, e);
   const inputElement = document.getElementById("comment-input");
   const content = inputElement.value;
   if (!content) return alert("댓글을 입력해주세요.");
 
   try {
-    const userId =
-      authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2";
-    // const postId = sessionStorage.getItem("docId");
-    const postId = "test";
+    const userId = authService.currentUser?.uid || testUid;
+    const postId = sessionStorage.getItem("docId");
+    // const postId = "test";
     const updated = { userId, postId, content, createdAt: Date.now() };
     await setDoc(doc(collection(dbService, "comment")), updated);
 
@@ -163,13 +167,13 @@ export const createComment = async (event) => {
   }
 };
 
-export const editComment = (event) => {
-  const parent = event.parentNode.parentNode;
-  event.parentNode.remove();
+export const editComment = (commentId) => {
+  const parent = window.event.target.parentNode.parentNode;
+  window.event.target.parentNode.remove();
   const btnsElement = document.createElement("div");
   btnsElement.classList.add("comment-btns");
-  const btns_html = `<div class="comment-edit-complete" onclick="updateComment(this);">수정완료</div>
-                    <div class="comment-edit-cancel" onclick="cancelEditComment(this);">취소</div>`;
+  const btns_html = `<div class="comment-edit-complete" onclick="updateComment('${commentId}');">수정완료</div>
+                    <div class="comment-edit-cancel" onclick="cancelEditComment();">취소</div>`;
   btnsElement.innerHTML = btns_html;
   parent.appendChild(btnsElement);
 
@@ -185,13 +189,12 @@ export const editComment = (event) => {
   parent_2.appendChild(inputElement);
 };
 
-export const cancelEditComment = (event) => {
+export const cancelEditComment = () => {
   getCommentList();
 };
 
-export const updateComment = async (event) => {
-  const containerElement = event.parentNode.parentNode.parentNode;
-  const commentId = containerElement.id;
+export const updateComment = async (commentId) => {
+  const containerElement = window.event.target.parentNode.parentNode.parentNode;
   const content = containerElement.getElementsByClassName(
     "comment-contents-edit"
   )[0].value;
@@ -210,10 +213,9 @@ export const updateComment = async (event) => {
   }
 };
 
-export const deleteComment = async (event) => {
+export const deleteComment = async (commentId) => {
   if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
 
-  const commentId = event.parentNode.parentNode.parentNode.id;
   if (!commentId) return alert("다시 시도해주세요.");
 
   try {
@@ -228,6 +230,6 @@ export const deleteComment = async (event) => {
 
 export const onEnterKey = () => {
   if (window.event.keyCode == 13) {
-    createComment();
+    createComments();
   }
 };
