@@ -1,5 +1,5 @@
 import { authService } from "./firebase.js";
-import { createComments, deletePoster, updateComment, deleteComment, onEnterKey, editComment, cancelEditComment, getUserProfile } from "./pages/poster.js";
+import { createComments, deletePoster, updateComment, deleteComment, onEnterKey, editComment, cancelEditComment, getUserProfile, updatePoster } from "./pages/poster.js";
 import { handleLocation, goToProfile, goToPostWriting, goToMain, goToProfile_Edit } from "./router.js";
 import { clickPost } from "./pages/cutemain.js";
 
@@ -24,6 +24,7 @@ authService.onAuthStateChanged((user) => {
 
 // 전역 함수 리스트
 // window.route = route;
+window.updatePoster = updatePoster;
 window.deletePoster = deletePoster;
 window.createComments = createComments;
 window.editComment = editComment;
