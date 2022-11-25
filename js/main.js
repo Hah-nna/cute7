@@ -12,7 +12,7 @@ import {
 import {
   handleLocation,
   goToProfile,
-  goToPost,
+  goToPostWriting,
   goToMain,
   goToProfile_Edit,
 } from "./router.js";
@@ -48,7 +48,7 @@ window.deleteComment = deleteComment;
 window.onEnterKey = onEnterKey;
 window.fil = fil;
 window.goToProfile = goToProfile;
-window.goToPost = goToPost;
+window.goToPostWriting = goToPostWriting;
 window.onFileChange = onFileChange;
 window.changeProfile = changeProfile;
 window.goToProfile_Edit = goToProfile_Edit;
