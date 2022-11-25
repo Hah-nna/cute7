@@ -13,7 +13,9 @@ import {
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
-const getUserProfile = async (uid) => {
+const testUid = "dYJBEhst3GYk8edYSjy4DhKQp2s2";
+
+export const getUserProfile = async (uid) => {
   try {
     const docRef = doc(dbService, "profile", uid);
     const docSnap = await getDoc(docRef);
@@ -29,8 +31,10 @@ const getUserProfile = async (uid) => {
   }
 };
 
-export const getPosterInfo = async (docId = "test") => {
+export const getPosterInfo = async () => {
   try {
+    const docId = sessionStorage.getItem("docId");
+    // const docId = "test"; //test
     const docRef = doc(dbService, "post", docId);
     const docSnap = await getDoc(docRef);
 
@@ -38,8 +42,7 @@ export const getPosterInfo = async (docId = "test") => {
       const { title, content, image, userId, createdAt } = docSnap.data();
       const { nickName, babyName, profileImage } = await getUserProfile(userId);
 
-      const uid =
-        authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
+      const uid = authService.currentUser?.uid || testUid; //test
       const userProfileImage = getUserProfile(uid).profileImage;
 
       if (userProfileImage)
@@ -75,8 +78,9 @@ export const getPosterInfo = async (docId = "test") => {
       console.log("No such document!");
     }
   } catch (err) {
-    console.error(err);
-    return alert("다시 시도해주세요.");
+    console.error(1, err);
+    alert("다시 시도해주세요.");
+    return history.back();
   }
 };
 
@@ -98,8 +102,8 @@ export const deletePoster = async () => {
 export const getCommentList = async () => {
   const commentList = document.getElementById("comment-list");
   commentList.innerHTML = "";
-  const docId = "test"; //test
-  // const docId = sessionStorage.getItem("docId");
+  // const docId = "test"; //test
+  const docId = sessionStorage.getItem("docId");
 
   try {
     const docRef = collection(dbService, "comment");
@@ -148,10 +152,9 @@ export const createComments = async (e) => {
   if (!content) return alert("댓글을 입력해주세요.");
 
   try {
-    const userId =
-      authService.currentUser?.uid || "dYJBEhst3GYk8edYSjy4DhKQp2s2";
-    // const postId = sessionStorage.getItem("docId");
-    const postId = "test";
+    const userId = authService.currentUser?.uid || testUid;
+    const postId = sessionStorage.getItem("docId");
+    // const postId = "test";
     const updated = { userId, postId, content, createdAt: Date.now() };
     await setDoc(doc(collection(dbService, "comment")), updated);
 
