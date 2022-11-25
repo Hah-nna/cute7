@@ -30,9 +30,6 @@ export const handleLocation = async () => {
   document.getElementById("main-page").innerHTML = html;
 
   if (path === "poster") {
-    // document.getElementById("post-user-img").src = authService.currentUser?.profileImage ?? "../assets/sampleImg.png";
-    // document.getElementById("comment-user-img").src = authService.currentUser?.profileImage ?? "../assets/sampleImg.png";
-    // document.getElementById("post-nickname").textContent = authService.currentUser?.displayName ?? "닉네임 없음";
     getPosterInfo();
     getCommentList();
   }

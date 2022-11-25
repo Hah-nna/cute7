@@ -68,8 +68,8 @@ export const getPosterInfo = async () => {
         if (btnElement.children.length < 2) {
           const div = document.createElement("div");
           div.id = "post-btns";
-          const temp_html = `<img class="comment-btn" onclick="editComment();" src="../assets/edit.png" width="36" height="36" />
-                              <img class="comment-btn" onclick="deleteComment();" src="../assets/delete.png" width="36" height="36" />`;
+          const temp_html = `<img class="comment-btn" src="../assets/edit.png" width="36" height="36" />
+                              <img class="comment-btn" src="../assets/delete.png" width="36" height="36" />`;
           div.innerHTML = temp_html;
           btnElement.appendChild(div);
         }
