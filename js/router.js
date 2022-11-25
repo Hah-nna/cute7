@@ -42,7 +42,7 @@ export const handleLocation = async () => {
 };
 
 export const goToMain = () => {
-  window.location.hash = "#/";
+  window.location.hash = "#";
 };
 
 export const goToProfile = () => {

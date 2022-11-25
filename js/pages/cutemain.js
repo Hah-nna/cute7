@@ -36,7 +36,7 @@ export const getPostList = async () => {
                             <a id="title">${title}</a>
                             <div id="users">
                               <img id="profileImage"
-                               src="${profileImage}"
+                              src="${profileImage}"
                               />
                               <a class="name">${nickName}</a>
                             </div>
