@@ -1,4 +1,17 @@
-import { authService, storageService } from "../firebase.js";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  deleteDoc,
+  updateDoc,
+  setDoc,
+  orderBy,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+
+import { authService, storageService, dbService } from "../firebase.js";
 import {
   ref,
   uploadString,
@@ -6,7 +19,70 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 import { updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+import { getYYYYMMDD } from "../util.js";
 ///
+
+const getUserProfile = async (uid) => {
+  // try {
+  const docRef = doc(dbService, "profile", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    console.log("No such document!");
+  }
+  // } catch (err) {
+  //   console.error(err);
+  //   return alert("다시 시도해주세요");
+  // }
+};
+/// 프로필 정보 불러오기
+export const getProfileInfo = async () => {
+  // try {
+  const { nickName, babyName, profileImage, description } =
+    await getUserProfile("dYJBEhst3GYk8edYSjy4DhKQp2s2");
+
+  if (nickName) document.getElementById("profile_nickName").value = nickName;
+  if (babyName) document.getElementById("profile_babyName").value = babyName;
+  if (description)
+    document.getElementById("profile_description").value = description;
+  if (profileImage) document.getElementById("profile_Image").src = profileImage;
+  // } catch (err) {
+  //   console.error(err);
+  //   return alert("다시 시도해주세요.");
+  // }
+};
+
+/// 프로필 하단 포스트 불러오기
+export const getProfilePostList = async () => {
+  const postList = document.getElementById("profile_post_box");
+  postList.innerHTML = "";
+  const docId = "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
+  // const docId = sessionStorage.getItem("docId");
+
+  // try {
+  const docRef = collection(dbService, "post");
+  const q = query(docRef, where("userId", "==", docId), orderBy("createdAt"));
+  const querySnapShot = await getDocs(q);
+
+  document.getElementById("profilepost_total").textContent = querySnapShot.size;
+
+  querySnapShot.forEach(async (doc) => {
+    const { userId, title, createdAt } = doc.data();
+    const temp_html = `<div class="profile_post_side">
+      <div class="profile_post">${title} ${getYYYYMMDD(createdAt)}</div>
+      </div>`;
+
+    const div = document.createElement("div");
+    div.innerHTML = temp_html;
+    postList.appendChild(div);
+  });
+  // } catch (err) {
+  //   console.error(err);
+  //   return alert("다시 시도해주세요오오오.");
+  // }
+};
 ///
 ///
 ///
@@ -70,7 +146,6 @@ export const onFileChange = (event) => {
 //-------------   검색기능 구현   ------------    //
 
 export function fil() {
-  console.log("불러온다~~");
   let value, contents, item, i;
 
   value = document.getElementById("profile_search").value;
@@ -103,3 +178,4 @@ export function fil() {
   }
 }
 //-------------   검색기능 구현   ------------    //
+//

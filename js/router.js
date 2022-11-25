@@ -1,6 +1,7 @@
 import { authService } from "./firebase.js";
 import { getPostList } from "./pages/cutemain.js";
 import { getCommentList, getPosterInfo } from "./pages/poster.js";
+import { getProfileInfo, getProfilePostList } from "./pages/profile_edit.js";
 
 export const route = (event) => {
   event.preventDefault();
@@ -9,7 +10,7 @@ export const route = (event) => {
 
 const routes = {
   "/": "/pages/main.html",
-  page1: "/pages/page1.html",
+  auth: "/pages/auth.html",
   poster: "/pages/poster.html",
   404: "/pages/404.html",
   profile: "/pages/profile.html",
@@ -29,13 +30,15 @@ export const handleLocation = async () => {
   document.getElementById("main-page").innerHTML = html;
 
   if (path === "poster") {
-    // document.getElementById("post-user-img").src = authService.currentUser?.profileImage ?? "../assets/sampleImg.png";
-    // document.getElementById("comment-user-img").src = authService.currentUser?.profileImage ?? "../assets/sampleImg.png";
-    // document.getElementById("post-nickname").textContent = authService.currentUser?.displayName ?? "닉네임 없음";
     getPosterInfo();
     getCommentList();
   }
 
+  if (path === "profile" || path === "profile_edit") {
+    getProfileInfo();
+    getProfilePostList();
+  }
+  // 프로필, 프로필수정 화면 일 때 현재 프로필 사진과 닉네임, 반려동물, 설명 할당
   if (path === "/") {
     getPostList();
   }
