@@ -30,20 +30,20 @@ export const getPostList = async () => {
     const { userId, image, title } = doc.data();
     const { profileImage, nickName } = await getUserProfile(userId);
     const temp_html = `<figure onclick="clickPost('${docId}')">
-                              <img
-                                id="image"
-                                src="${image}"
+                                <img
+                                  id="image"
+                                  src="${image}"
+                                />
+                          <figcaption>
+                            <a id="title">${title}</a>
+                            <div id="users">
+                              <img id="profileImage"
+                              src="${profileImage}"
                               />
-                              <figcaption>
-                                <a id="title">${title}</a>
-                                <div id="users">
-                                  <img id="profileImage"
-                                  src="${profileImage}"
-                                  />
-                                  <a class="name">${nickName}</a>
-                                </div>
-                              </figcaption>
-                            </figure>`;
+                              <a class="name">${nickName}</a>
+                            </div>
+                          </figcaption>
+                        </figure>`;
 
     const div = document.createElement("div");
     div.innerHTML = temp_html;

@@ -84,9 +84,10 @@
   padding-top: 50px;
   padding-bottom: 50px;
 }
-.comment-wrapper:last-child {
+/* .comment-wrapper:first-child {
   border-bottom: none;
-}
+} */
+
 .comment-items {
   flex: 1;
 }
@@ -152,7 +153,12 @@
   box-shadow: 10px 3px 10px rgba(0, 0, 0, 0.25);
 }
 #comment-input {
+  border: none;
+  background-color: #f5f7f9;
   flex: 1;
+}
+#comment-input:focus-visible {
+  outline: none;
 }
 .comment-create-btn {
   cursor: pointer;

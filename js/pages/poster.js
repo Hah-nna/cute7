@@ -68,8 +68,8 @@ export const getPosterInfo = async () => {
         if (btnElement.children.length < 2) {
           const div = document.createElement("div");
           div.id = "post-btns";
-          const temp_html = `<img class="comment-btn" src="../assets/edit.png" width="36" height="36" />
-                              <img class="comment-btn" src="../assets/delete.png" width="36" height="36" />`;
+          const temp_html = `<img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="24" height="24" />
+                              <img class="comment-btn" onclick="deletePoster();" src="../assets/delete.png" width="24" height="24" />`;
           div.innerHTML = temp_html;
           btnElement.appendChild(div);
         }
@@ -84,15 +84,24 @@ export const getPosterInfo = async () => {
   }
 };
 
-export const updatePoster = () => {};
+export const updatePoster = () => {
+  const docId = sessionStorage.getItem("docId");
+  sessionStorage.setItem("v2", docId);
+  window.location.hash = "posting-edit";
+};
 
 export const deletePoster = async () => {
+  if (!window.confirm("게시물을 삭제하시겠습니까?")) {
+    return;
+  }
+
   const docId = sessionStorage.getItem("docId");
   if (!docId) return alert("다시 시도해주세요.");
 
   try {
     await deleteDoc(doc(dbService, "post", docId));
-    return alert("게시글을 삭제하였습니다.");
+    alert("게시글을 삭제하였습니다.");
+    return history.back();
   } catch (err) {
     console.error(err);
     return alert("다시 시도해주세요.");
@@ -117,23 +126,23 @@ export const getCommentList = async () => {
       const { userId, postId, content, createdAt } = doc.data();
       const { profileImage, nickName } = await getUserProfile(userId);
       const temp_html = `<div class="comment-wrapper">
-                          <img class="comment-profile" src="${profileImage}" />
-                          <div class="comment-items">
-                            <div class="comment-header">
-                              <div class="comment-info">
-                                <div class="comment-nickname">${nickName}</div>
-                                <div class="comment-date">${getYYYYMMDD(
-                                  createdAt
-                                )}</div>
+                            <img class="comment-profile" src="${profileImage}" />
+                            <div class="comment-items">
+                              <div class="comment-header">
+                                <div class="comment-info">
+                                  <div class="comment-nickname">${nickName}</div>
+                                  <div class="comment-date">${getYYYYMMDD(
+                                    createdAt
+                                  )}</div>
+                                </div>
+                                <div class="comment-btns">
+                                  <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="24" height="24" />
+                                  <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="24" height="24" />
+                                </div>
                               </div>
-                              <div class="comment-btns">
-                                <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
-                                <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="36" height="36" />
-                              </div>
+                              <div class="comment-contents">${content}</div>
                             </div>
-                            <div class="comment-contents">${content}</div>
-                          </div>
-                        </div>`;
+                          </div>`;
 
       const div = document.createElement("div");
       div.innerHTML = temp_html;

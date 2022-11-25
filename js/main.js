@@ -8,6 +8,7 @@ import {
   editComment,
   cancelEditComment,
   getUserProfile,
+  updatePoster,
 } from "./pages/poster.js";
 import {
   handleLocation,
@@ -39,6 +40,7 @@ authService.onAuthStateChanged((user) => {
 
 // 전역 함수 리스트
 // window.route = route;
+window.updatePoster = updatePoster;
 window.deletePoster = deletePoster;
 window.createComments = createComments;
 window.editComment = editComment;
