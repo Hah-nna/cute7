@@ -68,8 +68,8 @@ export const getPosterInfo = async () => {
         if (btnElement.children.length < 2) {
           const div = document.createElement("div");
           div.id = "post-btns";
-          const temp_html = `<img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="24" height="24" />
-                              <img class="comment-btn" onclick="deletePoster();" src="../assets/delete.png" width="24" height="24" />`;
+          const temp_html = `<img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="20" height="20" />
+                              <img class="comment-btn" onclick="deletePoster();" src="../assets/delete.png" width="20" height="20" />`;
           div.innerHTML = temp_html;
           btnElement.appendChild(div);
         }
@@ -136,8 +136,8 @@ export const getCommentList = async () => {
                                   )}</div>
                                 </div>
                                 <div class="comment-btns">
-                                  <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="24" height="24" />
-                                  <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="24" height="24" />
+                                  <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="20" height="20" />
+                                  <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="20" height="20" />
                                 </div>
                               </div>
                               <div class="comment-contents">${content}</div>
