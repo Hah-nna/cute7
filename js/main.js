@@ -7,6 +7,7 @@ import {
   onEnterKey,
   editComment,
   cancelEditComment,
+  getUserProfile,
 } from "./pages/poster.js";
 import {
   handleLocation,
@@ -51,3 +52,4 @@ window.onFileChange = onFileChange;
 window.changeProfile = changeProfile;
 window.goToProfile_Edit = goToProfile_Edit;
 window.goToMain = goToMain;
+window.getUserProfile = getUserProfile;

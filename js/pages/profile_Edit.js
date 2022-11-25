@@ -36,7 +36,7 @@ const getUserProfile = async (uid) => {
     return alert("다시 시도해주세요");
   }
 };
-
+/// 프로필 정보 불러오기
 export const getProfileInfo = async (docId = "test") => {
   try {
     const docRef = doc(dbService, "post", docId);
@@ -67,6 +67,35 @@ export const getProfileInfo = async (docId = "test") => {
   }
 };
 
+/// 프로필 하단 포스트 불러오기
+export const getProfilePostList = async () => {
+  const commentList = document.getElementById("profile_post_box");
+  commentList.innerHTML = "";
+  const docId = "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
+  // const docId = sessionStorage.getItem("docId");
+
+  try {
+    const docRef = collection(dbService, "post");
+    const q = query(docRef, where("userId", "==", docId), orderBy("createdAt"));
+    const querySnapShot = await getDocs(q);
+
+    document.getElementById("profilepost_total").textContent =
+      querySnapShot.size;
+
+    querySnapShot.forEach(async (doc) => {
+      const commentId = doc.id;
+      const { userId, title, createdAt } = doc.data();
+      const temp_html = `<div class="profile_post_side">
+      <div class="profile_post">${title} ${getYYYYMMDD(createdAt)}</div>
+    </div>`;
+
+      commentList.append(temp_html);
+    });
+  } catch (err) {
+    console.error(err);
+    return alert("다시 시도해주세요.");
+  }
+};
 ///
 ///
 ///
@@ -162,3 +191,4 @@ export function fil() {
   }
 }
 //-------------   검색기능 구현   ------------    //
+//
