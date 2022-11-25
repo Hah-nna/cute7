@@ -1,5 +1,5 @@
-<script src="../js/pages/profile.js"></script>
-<link rel="stylesheet" href="../css/profile.css" />
+<script src="../js/pages/profile_edit.js"></script>
+<link rel="stylesheet" href="../css/profile_edit.css" />
 
 <div id="profile_Page">
   <section id="profile_Wrapper">
@@ -16,7 +16,7 @@
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
-      <span id="profile_back" onclick="goToMain()"></span>
+      <span id="profile_back" onclick="goToProfile()"></span>
       <!-- 뒤로가기 -->
       <div id="profile_imagebar">
         <div id="profile_imgLabel">
@@ -25,9 +25,18 @@
             src="../assets/blankProfile.webp"
             alt="파일 아이콘"
           />
+          <!-- 프로필 이미지 -->
         </div>
+        <label id="profile_imgLabel_edit" for="profile_imgInput_edit"
+          >프로필 파일 수정
+          <input
+            onchange="onFileChange(event)"
+            id="profile_imgInput_edit"
+            type="file"
+            accept="images/*"
+        /></label>
       </div>
-      <!-- 프로필 이미지 (누르면 파일에서 선택 가능)-->
+      <!-- 프로필 사진 수정 -->
 
       <div id="profile_contents">
         <input
@@ -35,7 +44,6 @@
           type="text"
           placeholder="닉네임"
           value=""
-          readonly
         />
         <!-- 닉네임 -->
         <input
@@ -43,14 +51,12 @@
           type="text"
           placeholder="반려동물 이름"
           value=""
-          readonly
         />
         <!-- 반려동물 이름 -->
         <textarea
           id="profile_description"
           placeholder="설명"
           value=""
-          readonly
         ></textarea>
         <!-- 설명 -->
       </div>
@@ -73,13 +79,15 @@
       <!-- 포스트에 있는 글 불러오기 -->
     </div>
     <div id="profile_bottombar">
+      <input id="profile_edit" type="submit" value="수정" />
+      <!-- 수정 -->
       <input
-        id="profile_Btn"
+        id="profile_cancel"
         type="button"
-        value="프로필 변경"
-        onclick="goToProfile_Edit()"
+        value="취소"
+        onclick="goToProfile()"
       />
-      <!-- 프로필 변경 버튼 -->
+      <!-- 취소 -->
     </div>
   </section>
 </div>

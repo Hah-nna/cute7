@@ -1,5 +1,7 @@
 import { authService } from "./firebase.js";
+import { getPostList } from "./pages/cutemain.js";
 import { getCommentList, getPosterInfo } from "./pages/poster.js";
+import { getProfileInfo, getProfilePostList } from "./pages/profile_edit.js";
 
 export const route = (event) => {
   event.preventDefault();
@@ -7,10 +9,13 @@ export const route = (event) => {
 };
 
 const routes = {
-  "/": "/pages/home.html",
+  "/": "/pages/main.html",
   auth: "/pages/auth.html",
   poster: "/pages/poster.html",
   404: "/pages/404.html",
+  profile: "/pages/profile.html",
+  profile_edit: "/pages/profile_edit.html",
+  post_writing: "/pages/post_writing.html",
 };
 
 export const handleLocation = async () => {
@@ -29,4 +34,37 @@ export const handleLocation = async () => {
     getPosterInfo();
     getCommentList();
   }
+
+  if (path === "profile" || path === "profile_edit") {
+    getProfileInfo();
+    getProfilePostList();
+  }
+  // 프로필, 프로필수정 화면 일 때 현재 프로필 사진과 닉네임, 반려동물, 설명 할당
+  if (path === "/") {
+    getPostList();
+  }
+};
+
+export const goToMain = () => {
+  window.location.hash = "#";
+};
+
+export const goToProfile = () => {
+  window.location.hash = "#profile";
+};
+
+export const goToProfile_Edit = () => {
+  window.location.hash = "#profile_edit";
+};
+
+export const goToPost = () => {
+  window.location.hash = "#poster";
+};
+
+export const goToPostId = () => {
+  window.location.hash = "#poster";
+};
+
+export const goToPostWriting = () => {
+  window.location.hash = "#post_writing";
 };

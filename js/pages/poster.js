@@ -1,10 +1,21 @@
-import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, setDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  deleteDoc,
+  updateDoc,
+  setDoc,
+  orderBy,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
 const testUid = "dYJBEhst3GYk8edYSjy4DhKQp2s2";
 
-const getUserProfile = async (uid) => {
+export const getUserProfile = async (uid) => {
   try {
     const docRef = doc(dbService, "profile", uid);
     const docSnap = await getDoc(docRef);
@@ -34,12 +45,21 @@ export const getPosterInfo = async () => {
       const uid = authService.currentUser?.uid || testUid; //test
       const userProfileImage = getUserProfile(uid).profileImage;
 
-      if (userProfileImage) document.getElementById("comment-user-img").src = userProfileImage;
-      if (image) document.getElementById("post-img").style.backgroundImage = `url(${image})`;
-      if (nickName) document.getElementById("post-nickname").textContent = nickName;
-      if (babyName) document.getElementById("post-animal-name").innerHTML = babyName;
-      if (createdAt) document.getElementById("post-date").textContent = getYYYYMMDD(createdAt);
-      if (profileImage) document.getElementById("post-user-img").src = profileImage;
+      if (userProfileImage)
+        document.getElementById("comment-user-img").src = userProfileImage;
+      if (image)
+        document.getElementById(
+          "post-img"
+        ).style.backgroundImage = `url(${image})`;
+      if (nickName)
+        document.getElementById("post-nickname").textContent = nickName;
+      if (babyName)
+        document.getElementById("post-animal-name").innerHTML = babyName;
+      if (createdAt)
+        document.getElementById("post-date").textContent =
+          getYYYYMMDD(createdAt);
+      if (profileImage)
+        document.getElementById("post-user-img").src = profileImage;
       if (title) document.getElementById("post-title").innerHTML = title;
       if (content) document.getElementById("post-desc").innerHTML = content;
 
@@ -106,7 +126,9 @@ export const getCommentList = async () => {
                             <div class="comment-header">
                               <div class="comment-info">
                                 <div class="comment-nickname">${nickName}</div>
-                                <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
+                                <div class="comment-date">${getYYYYMMDD(
+                                  createdAt
+                                )}</div>
                               </div>
                               <div class="comment-btns">
                                 <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
@@ -160,7 +182,8 @@ export const editComment = (commentId) => {
   parent.appendChild(btnsElement);
 
   const parent_2 = parent.parentNode;
-  const contentsElement = parent_2.getElementsByClassName("comment-contents")[0];
+  const contentsElement =
+    parent_2.getElementsByClassName("comment-contents")[0];
   const value = contentsElement.innerHTML.trim();
 
   contentsElement.remove();
@@ -176,7 +199,9 @@ export const cancelEditComment = () => {
 
 export const updateComment = async (commentId) => {
   const containerElement = window.event.target.parentNode.parentNode.parentNode;
-  const content = containerElement.getElementsByClassName("comment-contents-edit")[0].value;
+  const content = containerElement.getElementsByClassName(
+    "comment-contents-edit"
+  )[0].value;
 
   if (!commentId || !content) return alert("다시 시도해주세요.");
 
