@@ -64,7 +64,11 @@ export const getPosterInfo = async () => {
   }
 };
 
-export const updatePoster = () => {};
+export const updatePoster = () => {
+  const docId = sessionStorage.getItem("docId");
+  sessionStorage.setItem("v2", docId);
+  location.hash("#post-edit");
+};
 
 export const deletePoster = async () => {
   const docId = sessionStorage.getItem("docId");
