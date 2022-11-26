@@ -21,7 +21,6 @@ export const upload_postImage = (event) => {
   reader.readAsDataURL(theFile);
   reader.onloadend = (finishedEvent) => {
     const imgDataUrl = finishedEvent.currentTarget.result;
-    console.log(imgDataUrl);
     localStorage.setItem("imgDataUrl", imgDataUrl);
     document.getElementById("previewImg").src = imgDataUrl;
   };
