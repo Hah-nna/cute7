@@ -1,49 +1,78 @@
 import { authService } from "./firebase.js";
-// import { savePosting } from "./pages/post_writing.js";
+// import { getCommentList, getPosterInfo } from "./pages/poster.js";
+import { save_posting, upload_postImage } from "./pages/post_writing.js";
+// import {} from "./pages/post_edit.js";
 
-export const routes = {
+export const route = (event) => {
+  event.preventDefault();
+  console.log(event.target);
+  window.location.hash = event.target.hash;
+};
+
+const routes = {
+  "/": "/pages/main.html",
+  page1: "/pages/page1.html",
+  poster: "/pages/poster.html",
   404: "/pages/404.html",
-  "/": "/pages/auth.html",
-  post_writing: "/pages/post_writing.html",  
- };
-
+  profile: "/pages/profile.html",
+  profile_edit: "/pages/profile_edit.html",
+  post_writing: "/pages/post_writing.html",
+  post_edit: "/pages/post_edit.html",
+};
 
 export const handleLocation = async () => {
-  let path = window.location.hash.replace("#", "");
-  const pathName = window.location.pathname;
+  let path = window.location.hash.replace("#", ""); // ""
 
-  // Live Server를 index.html에서 오픈할 경우
-  if (pathName === "/index.html") {
-    window.history.pushState({}, "", "/");
-  }
+  // "http://example.com/"가 아니라 도메인 뒤에 / 없이 "http://example.com" 으로 나오는 경우
   if (path.length == 0) {
     path = "/";
   }
 
-  const route = routes[path] || routes[404];
+  const route = routes[path] || routes[404]; // truthy 하면 route[path], falsy 하면 routes[404]
+  console.log(route);
   const html = await fetch(route).then((data) => data.text());
   document.getElementById("root").innerHTML = html;
 
-  // 특정 화면 렌더링 되자마자 DOM 조작 처리
-  if (path === "fanLog") {
-    // 로그인한 회원의 프로필사진과 닉네임을 화면에 표시해줌.
-    document.getElementById("nickname").textContent =
-      authService.currentUser.displayName ?? "닉네임 없음";
-
-    document.getElementById("profileImg").src =
-      authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
-
+  if (path === "poster") {
+    // document.getElementById("post-user-img").src = authService.currentUser?.profileImage ?? "../assets/sampleImg.png";
+    // document.getElementById("comment-user-img").src = authService.currentUser?.profileImage ?? "../assets/sampleImg.png";
+    // document.getElementById("post-nickname").textContent = authService.currentUser?.displayName ?? "닉네임 없음";
+    getPosterInfo();
     getCommentList();
   }
-  if (path === "profile") {
-    // 프로필 관리 화면 일 때 현재 프로필 사진과 닉네임 할당
-    document.getElementById("profileView").src =
-      authService.currentUser.photoURL ?? "/assets/blankProfile.webp";
-    document.getElementById("profileNickname").placeholder =
-      authService.currentUser.displayName ?? "닉네임 없음";
-  }
+};
+if (path === "profile" || path === "profile_edit") {
+  // 프로필, 프로필수정 화면 일 때 현재 프로필 사진과 닉네임, 반려동물, 설명 할당
+  document.getElementById("profile_Image").src =
+    authService.currentUser.photoURL ?? "/assets/blankProfile.webp";
+  document.getElementById("profile_nickName").placeholder =
+    authService.currentUser.displayName ?? "닉네임";
+  document.getElementById("profile_babyName").placeholder =
+    authService.currentUser.displayName ?? "반려동물 이름";
+  document.getElementById("profile_description").placeholder =
+    authService.currentUser.displayName ?? "설명";
+}
+
+export const goToMain = () => {
+  window.location.hash = "/";
 };
 
 export const goToProfile = () => {
   window.location.hash = "#profile";
+};
+
+export const goToProfile_Edit = () => {
+  window.location.hash = "#profile_edit";
+};
+
+export const goToPost = () => {
+  window.location.hash = "#poster";
+};
+
+export const goToWrite = () => {
+  window.location.hash = "#post_writing";
+};
+
+export const goToWrite_edit = () => {
+  window.location.hash = "#post_edit";
 };

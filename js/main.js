@@ -1,7 +1,11 @@
-import { authService, dbService, storageService, } from "./firebase.js";
-import { handleLocation, routes } from "./router.js";
-import { savePosting } from "./pages/post_writing.js";
-
+import { authService } from "./firebase.js";
+import { handleLocation, route } from "./router.js";
+import {
+  save_posting,
+  save_postImage,
+  upload_postImage,
+} from "./pages/post_writing.js";
+import { edit_posting } from "./pages/post_edit.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation);
@@ -11,35 +15,35 @@ document.addEventListener("DOMContentLoaded", handleLocation);
 
 // 로그인 상태 모니터링
 authService.onAuthStateChanged((user) => {
-    // Firebase 연결되면 화면 표시
-		// user === authService.currentUser 와 같은 값
-        handleLocation();
-        const hash = window.location.hash;
-        if (user == "") {
-      // 로그인 상태인 경우
-      window.location.replace("#main")
-
-    } else {
-      // 로그아웃 상태인 경우
-      if (hash !== "") {
-        window.location.replace("")
-      }
-    }
-  });
+  // Firebase 연결되면 화면 표시
+  // user === authService.currentUser 와 같은 값
+  handleLocation();
+  if (user) {
+    // 로그인 상태인 경우
+  } else {
+    // 로그아웃 상태인 경우
+  }
+});
 
 // 전역 함수 리스트
-window.routes = routes;
-window.savePosting = savePosting;
-// window.onclick = onclick;
-// window.handleAuth = handleAuth;
+window.route = route;
+// window.deletePoster = deletePoster;
+// window.createComment = createComment;
+// window.editComment = editComment;
+// window.cancelEditComment = cancelEditComment;
+// window.updateComment = updateComment;
+// window.deleteComment = deleteComment;
+// window.onEnterKey = onEnterKey;
+// window.fil = fil;
 // window.goToProfile = goToProfile;
-// window.socialLogin = socialLogin;
-// window.logout = logout;
+// window.goToPost = goToPost;
 // window.onFileChange = onFileChange;
 // window.changeProfile = changeProfile;
-// window.save_comment = save_comment;
-// window.update_comment = update_comment;
-// window.onEditing = onEditing;
-// window.delete_comment = delete_comment;
-// window.savePost = save_post;
-// window.editPost = edit_post;
+// window.goToProfile_Edit = goToProfile_Edit;
+// window.goToMain = goToMain;
+// window.savePosting = savePosting;
+// window.handleAuth = handleAuth;
+window.save_posting = save_posting;
+window.save_postImage = save_postImage;
+window.upload_postImage = upload_postImage;
+window.edit_posting = edit_posting;
