@@ -58,7 +58,7 @@ export const handleLocation = async () => {
 };
 
 export const goToMain = () => {
-  window.location.hash = "/";
+  window.location.hash = "#main";
 };
 export const goToProfile = () => {
   window.location.hash = "#profile";
