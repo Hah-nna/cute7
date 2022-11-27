@@ -1,0 +1,50 @@
+<div id="authPage">
+
+
+  <div id="authWrapper" class="authWrapper">
+    <div class="row">
+      <div class="col align-items-center flex-col">
+        <div class="form-wrapper align-items-center">
+          <h1 id="authTitle">로그인</h1>
+          <form onsubmit="handleAuth(event)">
+            
+            <div class="authInput">
+              <input id="email" type="text" placeholder="Email" />
+            </div>
+
+            <div class="authInput">
+              <input id="pw" type="password" placeholder="Password" />
+            </div>
+
+            <section id="authBtnSection">
+              <input
+                type="submit"
+                class="pointer"
+                id="authBtn"
+                value="로그인하개🐕"
+              />
+            </section>
+
+            <p id="authToggle" class="pointer" onclick="onToggle()">
+              가입할거냥?😻
+            </p>
+            <hr />
+            <section id="tt1">or using Google and Github</section>
+          </form>
+
+          <section class="socialBtn1">
+            <button name="google" class="pointer" onclick="socialLogin(event)">
+              구글
+            </button>
+          </section>
+
+          <section class="socialBtn2">
+            <button name="github" class="pointer" onclick="socialLogin(event)">
+              깃허브
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
