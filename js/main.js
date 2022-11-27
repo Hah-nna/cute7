@@ -1,6 +1,6 @@
 import { authService } from "./firebase.js";
 import { createComments, deletePoster, updateComment, deleteComment, onEnterKey, editComment, cancelEditComment, getUserProfile, updatePoster } from "./pages/poster.js";
-import { handleLocation, goToProfile, goToPostWriting, goToMain, goToProfile_Edit } from "./router.js";
+import { handleLocation, goToProfile, goToPostWriting, goToMain, goToProfileEdit } from "./router.js";
 import { clickPost, fill } from "./pages/cutemain.js";
 import { handleLocation, route } from "./router.js";
 import { save_posting, save_postImage, upload_postImage } from "./pages/post_writing.js";
@@ -41,7 +41,7 @@ window.goToProfile = goToProfile;
 window.goToPostWriting = goToPostWriting;
 window.onFileChange = onFileChange;
 window.changeProfile = changeProfile;
-window.goToProfile_Edit = goToProfile_Edit;
+window.goToProfileEdit = goToProfileEdit;
 window.goToMain = goToMain;
 window.getUserProfile = getUserProfile;
 window.clickPost = clickPost;

@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 body {
   background-image: url("../assets/writing_body_backgroundImg.png");
-}
+} */
 
 .write-container {
   display: flex;
