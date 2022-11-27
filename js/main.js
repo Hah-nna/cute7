@@ -2,6 +2,9 @@ import { authService } from "./firebase.js";
 import { createComments, deletePoster, updateComment, deleteComment, onEnterKey, editComment, cancelEditComment, getUserProfile, updatePoster } from "./pages/poster.js";
 import { handleLocation, goToProfile, goToPostWriting, goToMain, goToProfile_Edit } from "./router.js";
 import { clickPost, fill } from "./pages/cutemain.js";
+import { handleLocation, route } from "./router.js";
+import { save_posting, save_postImage, upload_postImage } from "./pages/post_writing.js";
+import { edit_posting } from "./pages/post_edit.js";
 
 import { onFileChange, fil, changeProfile } from "./pages/profile_edit.js";
 // hash url 변경 시 처리
@@ -23,7 +26,6 @@ authService.onAuthStateChanged((user) => {
 });
 
 // 전역 함수 리스트
-// window.route = route;
 window.updatePoster = updatePoster;
 window.deletePoster = deletePoster;
 window.createComments = createComments;
@@ -43,3 +45,8 @@ window.goToProfile_Edit = goToProfile_Edit;
 window.goToMain = goToMain;
 window.getUserProfile = getUserProfile;
 window.clickPost = clickPost;
+window.route = route;
+window.save_posting = save_posting;
+window.save_postImage = save_postImage;
+window.upload_postImage = upload_postImage;
+window.edit_posting = edit_posting;
