@@ -1,26 +1,8 @@
-import {
-  doc,
-  getDoc,
-  getDocs,
-  collection,
-  query,
-  where,
-  deleteDoc,
-  updateDoc,
-  setDoc,
-  orderBy,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-
+import { doc, getDoc, getDocs, collection, query, where, updateDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { authService, storageService, dbService } from "../firebase.js";
-import {
-  ref,
-  uploadString,
-  getDownloadURL,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
-import { updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+import { ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import { getYYYYMMDD } from "../util.js";
-///
 
 const getUserProfile = async (uid) => {
   // try {
@@ -39,31 +21,29 @@ const getUserProfile = async (uid) => {
 };
 /// 프로필 정보 불러오기
 export const getProfileInfo = async () => {
-  // try {
-  const { nickName, babyName, profileImage, description } =
-    await getUserProfile("dYJBEhst3GYk8edYSjy4DhKQp2s2");
+  try {
+    const { uid } = authService.currentUser;
+    const { nickName, babyName, profileImage, description } = await getUserProfile(uid);
 
-  if (nickName) document.getElementById("profile_nickName").value = nickName;
-  if (babyName) document.getElementById("profile_babyName").value = babyName;
-  if (description)
-    document.getElementById("profile_description").value = description;
-  if (profileImage) document.getElementById("profile_Image").src = profileImage;
-  // } catch (err) {
-  //   console.error(err);
-  //   return alert("다시 시도해주세요.");
-  // }
+    if (nickName) document.getElementById("profile_nickName").value = nickName;
+    if (babyName) document.getElementById("profile_babyName").value = babyName;
+    if (description) document.getElementById("profile_description").value = description;
+    if (profileImage) document.getElementById("profile_Image").src = profileImage;
+  } catch (err) {
+    console.error(err);
+    // return alert("다시 시도해주세요.");
+  }
 };
 
 /// 프로필 하단 포스트 불러오기
 export const getProfilePostList = async () => {
   const postList = document.getElementById("profile_post_box");
+  const { uid } = authService.currentUser;
   postList.innerHTML = "";
-  const docId = "dYJBEhst3GYk8edYSjy4DhKQp2s2"; //test
-  // const docId = sessionStorage.getItem("docId");
 
   // try {
   const docRef = collection(dbService, "post");
-  const q = query(docRef, where("userId", "==", docId), orderBy("createdAt"));
+  const q = query(docRef, where("userId", "==", uid), orderBy("createdAt"));
   const querySnapShot = await getDocs(q);
 
   document.getElementById("profilepost_total").textContent = querySnapShot.size;
@@ -88,13 +68,9 @@ export const getProfilePostList = async () => {
 ///
 //-------------   수정을 누르면 프로필 변경 구현   ------------    //
 
-export const changeProfile = async (event) => {
-  event.preventDefault();
+export const changeProfile = async () => {
   document.getElementById("profile_edit").disabled = true;
-  const imgRef = ref(
-    storageService,
-    `${authService.currentUser.uid}/${uuidv4()}`
-  );
+  const imgRef = ref(storageService, `${authService.currentUser.uid}/${uuidv4()}`);
   // 넥네임, 반려동물, 설명을 변수에 담음
   const nickName = document.getElementById("profile_nickName").value;
   const babyName = document.getElementById("profile_babyName").value;
@@ -106,20 +82,22 @@ export const changeProfile = async (event) => {
     const response = await uploadString(imgRef, imgDataUrl, "data_url");
     downloadUrl = await getDownloadURL(response.ref);
   }
-  await updateProfile(authService.currentUser, {
-    nickName: nickName ? nickName : null,
-    babyName: babyName ? babyName : null,
-    description: description ? description : null,
-    photoURL: downloadUrl ? downloadUrl : null,
-  })
-    .then(() => {
-      alert("프로필 수정 완료");
-      window.location.hash = "#profile";
-    })
-    .catch((error) => {
-      alert("프로필 수정 실패");
-      console.log("error:", error);
-    });
+
+  const updated = {
+    nickName: nickName ?? null,
+    babyName: babyName ?? null,
+    description: description ?? null,
+    profileImage: downloadUrl ?? null,
+  };
+  const uid = authService.currentUser.uid;
+  try {
+    await updateDoc(doc(dbService, "profile", uid), updated);
+    alert("프로필 수정 완료");
+    window.location.hash = "#profile";
+  } catch ({ message }) {
+    // alert("프로필 수정 실패");
+    console.log("error:", message);
+  }
 };
 //-------------   수정을 누르면 프로필 변경 구현   ------------    //
 ///

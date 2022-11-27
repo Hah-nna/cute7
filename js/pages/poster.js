@@ -48,8 +48,8 @@ export const getPosterInfo = async () => {
         if (btnElement.children.length < 2) {
           const div = document.createElement("div");
           div.id = "post-btns";
-          const temp_html = `<img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="20" height="20" />
-                              <img class="comment-btn" onclick="deletePoster();" src="../assets/delete.png" width="20" height="20" />`;
+          const temp_html = `<img class="comment-btn" onclick="updatePoster();" src="../assets/edit.png" width="36" height="36" />
+                              <img class="comment-btn" onclick="deletePoster();" src="../assets/delete.png" width="36" height="36" />`;
           div.innerHTML = temp_html;
           btnElement.appendChild(div);
         }
@@ -67,7 +67,7 @@ export const getPosterInfo = async () => {
 export const updatePoster = () => {
   const docId = sessionStorage.getItem("docId");
   sessionStorage.setItem("v2", docId);
-  window.location.hash = "posting-edit";
+  window.location.hash = "#post_edit";
 };
 
 export const deletePoster = async () => {
@@ -113,8 +113,8 @@ export const getCommentList = async () => {
                                   <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
                                 </div>
                                 <div class="comment-btns">
-                                  <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="20" height="20" />
-                                  <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="20" height="20" />
+                                  <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
+                                  <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="36" height="36" />
                                 </div>
                               </div>
                               <div class="comment-contents">${content}</div>
@@ -132,7 +132,6 @@ export const getCommentList = async () => {
 };
 
 export const createComments = async (e) => {
-  console.log(1, e);
   const inputElement = document.getElementById("comment-input");
   const content = inputElement.value;
   if (!content) return alert("댓글을 입력해주세요.");

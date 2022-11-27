@@ -1,12 +1,3 @@
-/* :root {
-  --primary-color: #954f00d5;
-  --secondary-color: #673700;
-  --black: #000000;
-  --white: #ffffff;
-  --gray: #efefef;
-  --gray-2: #757575;
-} */
-
 #authTitle {
   text-align: left;
   font-weight: bold;
@@ -18,6 +9,13 @@
 }
 
 #authPage {
+  --primary-color: #954f00d5;
+  --secondary-color: #673700;
+  --black: #000000;
+  --white: #ffffff;
+  --gray: #efefef;
+  --gray-2: #757575;
+
   background: linear-gradient(rgba(253, 184, 55, 0.758), rgb(107, 47, 7));
   width: 100%;
   height: 100vh;
@@ -65,7 +63,6 @@
 
 .socialBtn1:hover {
   display: flex;
-  height: 100%;
   width: 100%;
   border-radius: 100px;
   transform: scale(1.1);
@@ -74,7 +71,6 @@
 
 .socialBtn2:hover {
   display: flex;
-  height: 100%;
   width: 100%;
   border-radius: 100px;
   transform: scale(1.1);

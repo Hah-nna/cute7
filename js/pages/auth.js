@@ -1,5 +1,7 @@
 import { emailRegex, pwRegex } from "../util.js";
-import { authService } from "../firebase.js";
+import { authService, dbService } from "../firebase.js";
+import { doc, setDoc, getDoc, collection } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,6 +10,21 @@ import {
   GithubAuthProvider,
   signOut,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+
+const createProfile = async (uid) => {
+  try { 
+  await setDoc(doc(dbService, "profile", uid), {
+    profileImage: null,
+    nickName: "",
+    babyName: "",
+    description: "",
+    userId: uid,
+  });
+  } catch (err) {
+    console.error(err);
+    return alert("다시 시도해주세요.");
+  }
+};
 
 // 로그인 성공 시 팬명록 화면으로 이동
 export const handleAuth = (event) => {
@@ -45,14 +62,16 @@ export const handleAuth = (event) => {
 
   // 유효성 검사 통과 후 로그인 또는 회원가입 API 요청
   const authBtnText = document.querySelector("#authBtn").value;
-  if (authBtnText === "로그인") {
+  console.log(authBtnText);
+  if (authBtnText === "로그인하개🐕") {
     // 유효성검사 후 로그인 성공 시 팬명록 화면으로
 
     signInWithEmailAndPassword(authService, emailVal, pwVal)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
-        window.location.hash = "#fanLog";
+        await createProfile(user);
+        window.location.hash = "#main";
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -70,7 +89,8 @@ export const handleAuth = (event) => {
       .then((userCredential) => {
         // Signed in
         console.log("회원가입 성공!");
-        // const user = userCredential.user;
+        const { uid } = userCredential.user;
+        createProfile(uid);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -98,7 +118,7 @@ export const onToggle = () => {
   }
 };
 
-export const socialLogin = (event) => {
+export const socialLogin = async (event) => {
   const { name } = event.target;
   let provider;
   if (name === "google") {
@@ -106,9 +126,17 @@ export const socialLogin = (event) => {
   } else if (name === "github") {
     provider = new GithubAuthProvider();
   }
+
   signInWithPopup(authService, provider)
-    .then((result) => {
-      const user = result.user;
+    .then(async ({ user }) => {
+      const { uid } = user;
+      const docRef = doc(dbService, "profile", uid);
+      const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        await createProfile(uid);
+        console.log(uid);
+      }
+      window.location.hash = "#main";
     })
     .catch((error) => {
       // Handle Errors here.

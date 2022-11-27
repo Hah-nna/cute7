@@ -1,19 +1,17 @@
-/* * {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-} */
-
-/* body {
+.write-parent-container {
   background-image: url("../assets/writing_body_backgroundImg.png");
-} */
+  height: 100%;
+}
+
+#chooseFile {
+  display: none;
+}
 
 .write-container {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 10px;
 }
-
 .writeUpload-box {
   width: 40%;
   display: flex;
@@ -27,7 +25,6 @@
   background-color: white;
   box-shadow: 10px 12px 10px rgba(0, 0, 0, 0.25);
 }
-
 .writeUpload-box .drag-file {
   position: relative;
   width: 100%;
@@ -40,19 +37,15 @@
   border: 3px dashed #dbdbdb;
   border-radius: 50px;
 }
-
 .writeUpload-box .drag-file.highlight {
   border: 3px dashed red;
 }
-
 .writeUpload-box .drag-file .image {
   width: 40px;
 }
-
 .writeUpload-box .drag-file .message {
   margin-bottom: 0;
 }
-
 .writeUpload-box .drag-file .preview {
   position: absolute;
   left: 0;
@@ -61,7 +54,6 @@
   height: 100%;
   border-radius: 50px;
 }
-
 .write-box {
   display: flex;
   justify-content: center;
@@ -74,12 +66,10 @@
   background-color: white;
   box-shadow: 10px 12px 10px rgba(0, 0, 0, 0.25);
 }
-
 .writeBox-group {
   width: 100%;
   margin-bottom: 1.25rem;
 }
-
 .writeBox-group label {
   display: inline-block;
   width: 100%;
@@ -90,14 +80,12 @@
   color: white;
   padding: 3px;
 }
-
 .writeBox-group input {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 50px;
   padding: 10px;
 }
-
 .writeBox-group textarea {
   height: 400px;
   width: 100%;
@@ -106,7 +94,6 @@
   padding: 10px;
   padding-top: 20px;
 }
-
 .yesOrNobtns {
   display: flex;
   width: 100%;
@@ -115,7 +102,6 @@
   margin-top: 10px;
   box-sizing: border-box;
 }
-
 #btn_no,
 #btn_yes {
   border: none;
@@ -131,7 +117,6 @@
   min-width: 120px;
   box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
 }
-
 #btn_no:active,
 #btn_yes:active {
   box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
@@ -139,7 +124,6 @@
   top: 2px;
   transition: 0.5s;
 }
-
 .fileUploadBtn {
   width: 100%;
   text-align: center;
@@ -164,11 +148,9 @@
   position: relative;
   top: 2px;
 }
-
 .file {
   display: none;
 }
-
 #previewImg {
   width: 100%;
   height: 100%;
