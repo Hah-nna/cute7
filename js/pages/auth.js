@@ -12,17 +12,17 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 
 const createProfile = async (uid) => {
-  try { 
-  await setDoc(doc(dbService, "profile", uid), {
-    profileImage: null,
-    nickName: "",
-    babyName: "",
-    description: "",
-    userId: uid,
-  });
+  try {
+    await setDoc(doc(dbService, "profile", uid), {
+      profileImage: null,
+      nickName: "",
+      babyName: "",
+      description: "",
+      userId: uid,
+    });
   } catch (err) {
     console.error(err);
-    return alert("다시 시도해주세요.");
+    // return alert("다시 시도해주세요.");
   }
 };
 
