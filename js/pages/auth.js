@@ -1,6 +1,11 @@
 import { emailRegex, pwRegex } from "../util.js";
 import { authService, dbService } from "../firebase.js";
-import { doc, setDoc, getDoc, collection } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
 import {
   createUserWithEmailAndPassword,
@@ -12,17 +17,17 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 
 const createProfile = async (uid) => {
-  try { 
-  await setDoc(doc(dbService, "profile", uid), {
-    profileImage: null,
-    nickName: "",
-    babyName: "",
-    description: "",
-    userId: uid,
-  });
+  try {
+    await setDoc(doc(dbService, "profile", uid), {
+      profileImage: null,
+      nickName: "",
+      babyName: "",
+      description: "",
+      userId: uid,
+    });
   } catch (err) {
     console.error(err);
-    return alert("다시 시도해주세요.");
+    // return alert("다시 시도해주세요.");
   }
 };
 
