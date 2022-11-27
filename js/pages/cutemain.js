@@ -7,7 +7,6 @@ import { getUserProfile } from "./poster.js";
 // // =============================  페이지 랜딩 시 게시물데이터 불러와서 표시하기  ============================= //
 export const getPostList = async () => {
   const postList = document.getElementById("main_columns");
-  console.log(postList);
   postList.innerHTML = "";
   const docId = "";
   const querySnapShot = await getDocs(collection(dbService, "post"));
@@ -15,8 +14,8 @@ export const getPostList = async () => {
     const docId = doc.id;
     const { userId, image, title, content } = doc.data();
     const { profileImage, nickName } = await getUserProfile(userId);
-    console.log(nickName);
-    const temp_html = `<figure onclick="clickPost('${docId}')" class="main_post">
+    const temp_html = `<div class="main_contents">
+                          <figure onclick="clickPost('${docId}')" class="main_post">
                               <img
                                 id="image"
                                 src="${image}"
@@ -30,7 +29,8 @@ export const getPostList = async () => {
                                   <a class="main_name">${nickName}</a>
                                 </div>
                               </figcaption>
-                            </figure>`;
+                            </figure>
+                            </div>`;
 
     const div = document.createElement("div");
     div.innerHTML = temp_html;
@@ -48,7 +48,6 @@ export const getPostList = async () => {
 //
 // =============================  포스터 클릭시 해당 포스터로 이동  ============================= //
 export const clickPost = async (docId) => {
-  console.log(docId);
   sessionStorage.setItem("docId", docId);
   goToPostId();
 };
@@ -67,19 +66,20 @@ export function fill() {
   value = document.getElementById("main_search_1").value;
   // "main_search_1"아이디에 포함된 모든 문자열의 입력값을 value에 넣어준다.
   //쉽게 보면 글검색창에 단어를 입력시 value에 넣어준다라고 생각하면됨
-  // console.log(value);
-  item = document.getElementById("main_columns").children;
+  item = document.getElementsByClassName("main_contents");
   // "profile_post_side"클래스, 즉 이미 있는 글내용과 닉네임이 있는 클래스에 포함된 모든 문자열을 item에 넣어준다.
+
   for (i = 0; i < item.length; i++) {
     // item에는 item[0], item[1], item[2] 현재 이렇게 담겨져있다.
+
     title = item[i].getElementsByClassName("main_title");
     // 각 아이템 배열에서 클래스 contents, 즉 글내용 부분을 담는다.
     name = item[i].getElementsByClassName("main_name");
     // 각 아이템 배열에서 클래스 nick, 즉 닉네임 부분을 담는다
     // content = item[i].getDocs(collection(dbService, "post")); //여기에 content도 불러와야하는데 어떻게 불러오는지 일단 모르겠다.
     if (
-      title[0].innerHTML.indexOf(value) !== -1 ||
-      name[0].innerHTML.indexOf(value) !== -1
+      title[0].innerHTML.indexOf(value) > -1 ||
+      name[0].innerHTML.indexOf(value) > -1
       // || content[0].innerHTML.indexOf(value) > -1 //여기에 content도 불러와야하는데 어떻게 불러오는지 일단 모르겠다.
     ) {
       // innerHTML은 HTML의 컨텐츠, 즉 내용에 접근할 수 있는 변수이고

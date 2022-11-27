@@ -7,12 +7,7 @@
       <p id="profile_home"></p>
       <span style="cursor: pointer" onclick="goToMain()">홈</span>
       <!-- 홈버튼 -->
-      <input
-        onkeyup="fil()"
-        id="profile_search"
-        type="text"
-        placeholder="검색"
-      />
+      <input onkeyup="fil()" id="profile_search" type="text" placeholder="검색" />
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
@@ -20,44 +15,19 @@
       <!-- 뒤로가기 -->
       <div id="profile_imagebar">
         <div id="profile_imgLabel">
-          <img
-            id="profile_Image"
-            src="../assets/blankProfile.webp"
-            alt="파일 아이콘"
-          />
+          <img id="profile_Image" src="../assets/blankProfile.webp" alt="파일 아이콘" />
           <!-- 프로필 이미지 -->
         </div>
-        <label id="profile_imgLabel_edit" for="profile_imgInput_edit"
-          >프로필 파일 수정
-          <input
-            onchange="onFileChange(event)"
-            id="profile_imgInput_edit"
-            type="file"
-            accept="images/*"
-        /></label>
+        <label id="profile_imgLabel_edit" for="profile_imgInput_edit">프로필 파일 수정 <input onchange="onFileChange(event)" id="profile_imgInput_edit" type="file" accept="images/*" /></label>
       </div>
       <!-- 프로필 사진 수정 -->
 
       <div id="profile_contents">
-        <input
-          id="profile_nickName"
-          type="text"
-          placeholder="닉네임"
-          value=""
-        />
+        <input id="profile_nickName" type="text" placeholder="닉네임" value="" />
         <!-- 닉네임 -->
-        <input
-          id="profile_babyName"
-          type="text"
-          placeholder="반려동물 이름"
-          value=""
-        />
+        <input id="profile_babyName" type="text" placeholder="반려동물 이름" value="" />
         <!-- 반려동물 이름 -->
-        <textarea
-          id="profile_description"
-          placeholder="설명"
-          value=""
-        ></textarea>
+        <textarea id="profile_description" placeholder="설명" value=""></textarea>
         <!-- 설명 -->
       </div>
     </form>
@@ -79,14 +49,9 @@
       <!-- 포스트에 있는 글 불러오기 -->
     </div>
     <div id="profile_bottombar">
-      <input id="profile_edit" type="submit" value="수정" />
+      <button id="profile_edit" onclick="changeProfile(this);">수정</button>
       <!-- 수정 -->
-      <input
-        id="profile_cancel"
-        type="button"
-        value="취소"
-        onclick="goToProfile()"
-      />
+      <input id="profile_cancel" type="button" value="취소" onclick="goToProfile();" />
       <!-- 취소 -->
     </div>
   </section>
