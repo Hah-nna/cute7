@@ -58,7 +58,8 @@
 }
 
 #profile_Btn {
-  width: 300px;
+  padding: 3px;
+  width: 130px;
   color: white;
   cursor: pointer;
   background-color: #98c200;
@@ -71,7 +72,7 @@
 
 #profile_bottombar {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 80px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -86,28 +87,36 @@
   flex-direction: column;
 }
 #profile_logout {
-  width: 300px;
+  padding: 3px;
+  width: 130px;
   background-color: cornflowerblue;
   border-radius: 20px;
   color: white;
 }
 
 #profile_contents > * {
+  padding: 5px;
   margin-bottom: 20px;
   border-radius: 8px;
   border-style: none;
+  background-color: rgba(255, 255, 255, 0.5);
   width: 150px;
   height: 20px;
   filter: drop-shadow(10px 12px 18px rgba(0, 0, 0, 0.2));
 }
 
 #profile_description {
+  cursor: text;
   width: 250px;
   resize: none;
   height: 100px;
 }
 
 #profile_home {
+  margin-top: 20px;
+  padding-top: 5px;
+  text-align: center;
+  color: white;
   float: left;
   position: relative;
   background: #fc664e;
@@ -118,9 +127,11 @@
 }
 
 #profile_search {
+  padding: 15px;
   border-radius: 8px;
   height: 20px;
   margin-top: 20px;
+  background-color: rgba(255, 255, 255);
   float: right;
   width: 90%;
   border-style: none;
@@ -168,6 +179,8 @@
   left: 10%;
 }
 .profile_post {
+  position: relative;
+  left: -25px;
   background-color: rgb(201, 181, 0);
   color: white;
   cursor: pointer;
@@ -175,7 +188,8 @@
   border-radius: 8px;
   height: 25px;
   margin-top: 20px;
-  width: 80%;
+  padding: 4px;
+  width: 90%;
   border-style: none;
   filter: drop-shadow(10px 12px 18px rgba(0, 0, 0, 0.2));
 }

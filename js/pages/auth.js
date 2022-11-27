@@ -1,6 +1,11 @@
 import { emailRegex, pwRegex } from "../util.js";
 import { authService, dbService } from "../firebase.js";
-import { doc, setDoc, getDoc, collection } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
 import {
   createUserWithEmailAndPassword,
