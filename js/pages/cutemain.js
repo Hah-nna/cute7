@@ -16,7 +16,8 @@ export const getPostList = async () => {
     const { userId, image, title, content } = doc.data();
     const { profileImage, nickName } = await getUserProfile(userId);
     console.log(nickName);
-    const temp_html = `<figure onclick="clickPost('${docId}')" class="main_post">
+    const temp_html = `<div class="main_contents">
+                          <figure onclick="clickPost('${docId}')" class="main_post">
                               <img
                                 id="image"
                                 src="${image}"
@@ -30,7 +31,8 @@ export const getPostList = async () => {
                                   <a class="main_name">${nickName}</a>
                                 </div>
                               </figcaption>
-                            </figure>`;
+                            </figure>
+                            </div>`;
 
     const div = document.createElement("div");
     div.innerHTML = temp_html;
@@ -77,14 +79,14 @@ export function fill() {
     name = item[i].getElementsByClassName("main_name");
     // 각 아이템 배열에서 클래스 nick, 즉 닉네임 부분을 담는다
     // content = item[i].getDocs(collection(dbService, "post")); //여기에 content도 불러와야하는데 어떻게 불러오는지 일단 모르겠다.
+    // console.log(title[0].innerHTML, name[0].innerHTML, name);
     if (
       title[0].innerHTML.indexOf(value) !== -1 ||
       name[0].innerHTML.indexOf(value) !== -1
       // || content[0].innerHTML.indexOf(value) > -1 //여기에 content도 불러와야하는데 어떻게 불러오는지 일단 모르겠다.
     ) {
-      // innerHTML은 HTML의 컨텐츠, 즉 내용에 접근할 수 있는 변수이고
+      // console.log(name, title, item);
       // indexOf()는 괄호안 값 문자열의 위치가 0,1,2,3,4... 인지 반환, 만약 없으면 -1을 반환한다.
-
       //만약 첫번째 글내용에 HTML의 컨텐츠값인 value(이건 검색창에서 입력한 문자열)가 존재하거나
       //|| 혹은 첫번째 닉네임에 HTML의 컨텐츠값인 value(이건 검색창에서 입력한 문자열)이 존재할경우
 
@@ -93,6 +95,7 @@ export function fill() {
     } else {
       item[i].style.display = "none";
       // 지금 전체 글내용중에서 해당 번째의 글내용을 보여주지 않는다.
+      console.log(item[i]);
     }
   }
 }
