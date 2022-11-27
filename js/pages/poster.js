@@ -104,7 +104,7 @@ export const getCommentList = async () => {
       const commentId = doc.id;
       const { userId, postId, content, createdAt } = doc.data();
       const { profileImage, nickName } = await getUserProfile(userId);
-      const temp_html = `<div class="comment-wrapper">
+      let temp_html = `<div class="comment-wrapper">
                             <img class="comment-profile" src="${profileImage}" />
                             <div class="comment-items">
                               <div class="comment-header">
@@ -112,14 +112,17 @@ export const getCommentList = async () => {
                                   <div class="comment-nickname">${nickName}</div>
                                   <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
                                 </div>
-                                <div class="comment-btns">
-                                  <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
-                                  <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="36" height="36" />
-                                </div>
-                              </div>
-                              <div class="comment-contents">${content}</div>
-                            </div>
-                          </div>`;
+                                `;
+      if (userId === authService.currentUser.uid) {
+        temp_html += `<div class="comment-btns">
+                        <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
+                        <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="36" height="36" />
+                      </div>`;
+      }
+      temp_html += `</div>
+                    <div class="comment-contents">${content}</div>
+                  </div>
+                </div>`;
 
       const div = document.createElement("div");
       div.innerHTML = temp_html;
