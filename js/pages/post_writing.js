@@ -45,7 +45,7 @@ export const save_posting = async (event) => {
       content: write_posting.value,
     });
     alert("포스팅 저장 완료!");
-    window.location.hash = "#main";
+    window.location.hash = "";
   } catch (error) {
     alert(error);
     console.log("error in addDoc:", error);
