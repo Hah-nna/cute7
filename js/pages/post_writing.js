@@ -31,11 +31,9 @@ export const save_postImage = async () => {
 export const save_posting = async (event) => {
   event.preventDefault();
   const imageUrl = await save_postImage();
-  console.log(imageUrl);
   const write_posting = document.getElementById("write_posting");
   const write_title = document.getElementById("write_title");
   const { uid } = authService.currentUser;
-  // console.log(authService.currentUser)
   try {
     await addDoc(collection(dbService, "post"), {
       createdAt: Date.now(),

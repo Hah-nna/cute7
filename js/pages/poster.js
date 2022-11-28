@@ -103,7 +103,6 @@ export const getCommentList = async () => {
     querySnapShot.forEach(async (doc) => {
       const commentId = doc.id;
       const { userId, postId, content, createdAt } = doc.data();
-      console.log(authService.currentUser.uid);
       const { profileImage, nickName } = await getUserProfile(userId);
       let temp_html = `<div class="comment-wrapper">
                             <img class="comment-profile" src="${profileImage || "../assets/blankProfile.webp"}" : } />
