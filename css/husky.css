@@ -1462,6 +1462,9 @@
     transform: rotateZ(-16deg) rotateY(180deg);
   }
 }
+body {
+  background-color: #4f8edb;
+}
 
 .codrops-header h1 {
   -webkit-animation: squigglevision 0.3s infinite;
