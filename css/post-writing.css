@@ -107,7 +107,7 @@
 #btn_yes {
   border: none;
   outline: transparent;
-  background-color: #4f8edb;
+  background-color: rgb(138, 82, 58);
   border-radius: 100px;
   padding: 20px;
   color: white;
@@ -136,7 +136,7 @@
   text-align: center;
   align-items: center;
   margin-top: 30px;
-  background-color: #4f8edb;
+  background-color: rgb(138, 82, 58);
   color: #fff;
   padding: 10px;
   width: 100%;

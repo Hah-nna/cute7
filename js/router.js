@@ -32,8 +32,6 @@ export const handleLocation = async () => {
   if (path === "/") {
     if (isLogin) {
       path = "main";
-    } else {
-      path = "/";
     }
   }
 
