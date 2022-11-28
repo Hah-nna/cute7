@@ -1,4 +1,15 @@
-import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, setDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  deleteDoc,
+  updateDoc,
+  setDoc,
+  orderBy,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
@@ -32,12 +43,21 @@ export const getPosterInfo = async () => {
       const userProfile = await getUserProfile(uid);
       const userProfileImage = userProfile.profileImage;
 
-      if (userProfileImage) document.getElementById("comment-user-img").src = userProfileImage;
-      if (image) document.getElementById("post-img").style.backgroundImage = `url(${image})`;
-      if (nickName) document.getElementById("post-nickname").textContent = nickName;
-      if (babyName) document.getElementById("post-animal-name").innerHTML = babyName;
-      if (createdAt) document.getElementById("post-date").textContent = getYYYYMMDD(createdAt);
-      if (profileImage) document.getElementById("post-user-img").src = profileImage;
+      if (userProfileImage)
+        document.getElementById("comment-user-img").src = userProfileImage;
+      if (image)
+        document.getElementById(
+          "post-img",
+        ).style.backgroundImage = `url(${image})`;
+      if (nickName)
+        document.getElementById("post-nickname").textContent = nickName;
+      if (babyName)
+        document.getElementById("post-animal-name").innerHTML = babyName;
+      if (createdAt)
+        document.getElementById("post-date").textContent =
+          getYYYYMMDD(createdAt);
+      if (profileImage)
+        document.getElementById("post-user-img").src = profileImage;
       if (title) document.getElementById("post-title").innerHTML = title;
       if (content) document.getElementById("post-desc").innerHTML = content;
 
@@ -103,12 +123,18 @@ export const getCommentList = async () => {
       const { userId, postId, content, createdAt } = doc.data();
       const { profileImage, nickName } = await getUserProfile(userId);
       let temp_html = `<div class="comment-wrapper">
-                            <img class="comment-profile" src="${profileImage || "../assets/blankProfile.webp"}" : } />
+                            <img class="comment-profile" src="${
+                              profileImage || "../assets/blankProfile.webp"
+                            }" : } />
                             <div class="comment-items">
                               <div class="comment-header">
                                 <div class="comment-info">
-                                  <div class="comment-nickname">${nickName || "닉네임 없음"}</div>
-                                  <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
+                                  <div class="comment-nickname">${
+                                    nickName || "닉네임 없음"
+                                  }</div>
+                                  <div class="comment-date">${getYYYYMMDD(
+                                    createdAt,
+                                  )}</div>
                                 </div>
                                 `;
       if (userId === authService.currentUser.uid) {
@@ -163,7 +189,8 @@ export const editComment = (commentId) => {
   parent.appendChild(btnsElement);
 
   const parent_2 = parent.parentNode;
-  const contentsElement = parent_2.getElementsByClassName("comment-contents")[0];
+  const contentsElement =
+    parent_2.getElementsByClassName("comment-contents")[0];
   const value = contentsElement.innerHTML.trim();
 
   contentsElement.remove();
@@ -179,7 +206,9 @@ export const cancelEditComment = () => {
 
 export const updateComment = async (commentId) => {
   const containerElement = window.event.target.parentNode.parentNode.parentNode;
-  const content = containerElement.getElementsByClassName("comment-contents-edit")[0].value;
+  const content = containerElement.getElementsByClassName(
+    "comment-contents-edit",
+  )[0].value;
 
   if (!commentId || !content) return alert("다시 시도해주세요.");
 
