@@ -1,16 +1,21 @@
+.chris {
+  transform: scale(2.5);
+  position: relative;
+  top: 150px;
+  left: 2330px;
+}
+
 #authTitle {
   text-align: left;
   font-weight: bold;
   font-size: xx-large;
-  color: #693b07;
   transform: scale(1);
   transition: 0.5s ease-in-out;
   transition-delay: 0.3s;
 }
 
 #authPage {
-  --primary-color: #4f8edb;
-  --secondary-color: #4f8edb;
+  --primary-color: #3bb0c5d5;
   --black: #000000;
   --white: #ffffff;
   --gray: #efefef;
