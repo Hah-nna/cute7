@@ -2,8 +2,6 @@ import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, s
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
-const testUid = "dYJBEhst3GYk8edYSjy4DhKQp2s2";
-
 export const getUserProfile = async (uid) => {
   try {
     const docRef = doc(dbService, "profile", uid);
@@ -31,8 +29,11 @@ export const getPosterInfo = async () => {
       const { title, content, image, userId, createdAt } = docSnap.data();
       const { nickName, babyName, profileImage } = await getUserProfile(userId);
 
-      const uid = authService.currentUser?.uid || testUid; //test
-      const userProfileImage = getUserProfile(uid).profileImage;
+      const uid = authService.currentUser.uid;
+      const userProfile = await getUserProfile(uid);
+      const userProfileImage = userProfile.profileImage;
+
+      console.log(userProfileImage);
 
       if (userProfileImage) document.getElementById("comment-user-img").src = userProfileImage;
       if (image) document.getElementById("post-img").style.backgroundImage = `url(${image})`;
