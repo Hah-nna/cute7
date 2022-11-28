@@ -28,7 +28,7 @@
 }
 
 #main_home {
-  background-color: #4f8edb;
+  background-color: rgb(223, 83, 83);
   color: white;
   margin: 0 1%;
   transition: 0.5s;
@@ -53,7 +53,7 @@
 }
 
 #main_posting:hover {
-  background-color: #4f8edb;
+  background-color: rgb(223, 83, 83);
   color: white;
   cursor: pointer;
   font-size: 24px;
@@ -68,7 +68,7 @@
 }
 
 #main_mypage:hover {
-  background-color: #4f8edb;
+  background-color: rgb(223, 83, 83);
   color: white;
   cursor: pointer;
   font-size: 24px;
@@ -192,7 +192,7 @@ img {
 }
 
 #main_upbotton:hover {
-  background-color: #4f8edb;
+  background-color: rgb(223, 83, 83);
   color: white;
   width: 60px;
   height: 60px;
