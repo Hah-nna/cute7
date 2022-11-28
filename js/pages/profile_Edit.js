@@ -1,19 +1,6 @@
-import {
-  doc,
-  getDoc,
-  getDocs,
-  collection,
-  query,
-  where,
-  updateDoc,
-  orderBy,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import { doc, getDoc, getDocs, collection, query, where, updateDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { authService, storageService, dbService } from "../firebase.js";
-import {
-  ref,
-  uploadString,
-  getDownloadURL,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
+import { ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import { getYYYYMMDD } from "../util.js";
 
@@ -36,15 +23,12 @@ const getUserProfile = async (uid) => {
 export const getProfileInfo = async () => {
   try {
     const { uid } = authService.currentUser;
-    const { nickName, babyName, profileImage, description } =
-      await getUserProfile(uid);
+    const { nickName, babyName, profileImage, description } = await getUserProfile(uid);
 
     if (nickName) document.getElementById("profile_nickName").value = nickName;
     if (babyName) document.getElementById("profile_babyName").value = babyName;
-    if (description)
-      document.getElementById("profile_description").value = description;
-    if (profileImage)
-      document.getElementById("profile_Image").src = profileImage;
+    if (description) document.getElementById("profile_description").value = description;
+    if (profileImage) document.getElementById("profile_Image").src = profileImage;
   } catch (err) {
     console.error(err);
     // return alert("다시 시도해주세요.");
@@ -67,9 +51,7 @@ export const getProfilePostList = async () => {
   querySnapShot.forEach(async (doc) => {
     const { userId, title, createdAt } = doc.data();
     const temp_html = `<div class="profile_post_side">
-      <div class="profile_post">${title}&nbsp&nbsp&nbsp&nbsp&nbsp${getYYYYMMDD(
-      createdAt
-    )}</div>
+      <div class="profile_post">${title}&nbsp&nbsp&nbsp&nbsp&nbsp${getYYYYMMDD(createdAt)}</div>
       </div>`;
 
     const div = document.createElement("div");
@@ -88,10 +70,7 @@ export const getProfilePostList = async () => {
 
 export const changeProfile = async () => {
   document.getElementById("profile_edit").disabled = true;
-  const imgRef = ref(
-    storageService,
-    `${authService.currentUser.uid}/${uuidv4()}`
-  );
+  const imgRef = ref(storageService, `${authService.currentUser.uid}/${uuidv4()}`);
   // 넥네임, 반려동물, 설명을 변수에 담음
   const nickName = document.getElementById("profile_nickName").value;
   const babyName = document.getElementById("profile_babyName").value;

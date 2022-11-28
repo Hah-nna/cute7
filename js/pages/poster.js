@@ -21,7 +21,6 @@ export const getUserProfile = async (uid) => {
 export const getPosterInfo = async () => {
   try {
     const docId = sessionStorage.getItem("docId");
-    // const docId = "test"; //test
     const docRef = doc(dbService, "post", docId);
     const docSnap = await getDoc(docRef);
 
