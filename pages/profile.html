@@ -1,6 +1,3 @@
-<script src="../js/pages/profile.js"></script>
-<link rel="stylesheet" href="../css/profile.css" />
-
 <div id="profile_Page">
   <section id="profile_Wrapper">
     <div id="profile_topbar">
@@ -8,12 +5,7 @@
         <span style="cursor: pointer" onclick="goToMain()">홈</span>
       </p>
       <!-- 홈버튼 -->
-      <input
-        onkeyup="fil()"
-        id="profile_search"
-        type="text"
-        placeholder="검색"
-      />
+      <input onkeyup="fil()" id="profile_search" type="text" placeholder="검색" />
       <!-- 검색창 -->
     </div>
     <form id="profile_Form" onsubmit="changeProfile(event)">
@@ -21,38 +13,17 @@
       <!-- 뒤로가기 -->
       <div id="profile_imagebar">
         <div id="profile_imgLabel">
-          <img
-            id="profile_Image"
-            src="../assets/blankProfile.webp"
-            alt="파일 아이콘"
-          />
+          <img id="profile_Image" src="../assets/blankProfile.webp" alt="파일 아이콘" />
         </div>
       </div>
       <!-- 프로필 이미지 (누르면 파일에서 선택 가능)-->
 
       <div id="profile_contents">
-        <input
-          id="profile_nickName"
-          type="text"
-          placeholder="닉네임"
-          value=""
-          readonly
-        />
+        <input id="profile_nickName" type="text" placeholder="닉네임" value="" readonly />
         <!-- 닉네임 -->
-        <input
-          id="profile_babyName"
-          type="text"
-          placeholder="반려동물 이름"
-          value=""
-          readonly
-        />
+        <input id="profile_babyName" type="text" placeholder="반려동물 이름" value="" readonly />
         <!-- 반려동물 이름 -->
-        <textarea
-          id="profile_description"
-          placeholder="설명"
-          value=""
-          readonly
-        ></textarea>
+        <textarea id="profile_description" placeholder="설명" value="" readonly></textarea>
         <!-- 설명 -->
       </div>
     </form>
@@ -74,12 +45,7 @@
       <!-- 포스트에 있는 글 불러오기 -->
     </div>
     <div id="profile_bottombar">
-      <input
-        id="profile_Btn"
-        type="button"
-        value="프로필 변경"
-        onclick="goToProfileEdit()"
-      />
+      <input id="profile_Btn" type="button" value="프로필 변경" onclick="goToProfileEdit()" />
       <!-- 프로필 변경 버튼 -->
       <button id="profile_logout" onclick="logout();">로그아웃</button>
     </div>
