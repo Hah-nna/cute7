@@ -42,7 +42,7 @@ export const edit_posting = async (event) => {
     const updated = image ? { title, content, image } : { title, content };
     await updateDoc(docRef, updated);
     window.alert("수정이 완료되었습니다");
-    location.hash = "main-page";
+    location.hash = "";
   } catch (err) {
     console.error(err.message);
     window.alert("다시 시도해주세요");
