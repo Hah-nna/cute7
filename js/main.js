@@ -1,10 +1,31 @@
 import { authService } from "./firebase.js";
-import { createComments, deletePoster, updateComment, deleteComment, onEnterKey, editComment, cancelEditComment, getUserProfile, updatePoster } from "./pages/poster.js";
-import { handleLocation, goToProfile, goToPostWriting, goToMain, goToProfileEdit } from "./router.js";
+import {
+  createComments,
+  deletePoster,
+  updateComment,
+  deleteComment,
+  onEnterKey,
+  editComment,
+  cancelEditComment,
+  getUserProfile,
+  updatePoster,
+} from "./pages/poster.js";
+import {
+  handleLocation,
+  goToProfile,
+  goToPostWriting,
+  goToMain,
+  goToProfileEdit,
+} from "./router.js";
 import { clickPost, fill } from "./pages/cutemain.js";
-import { save_posting, save_postImage, upload_postImage } from "./pages/post_writing.js";
+import {
+  save_posting,
+  save_postImage,
+  upload_postImage,
+} from "./pages/post_writing.js";
 import { edit_posting, cancel_posting } from "./pages/post_edit.js";
 import { onToggle, socialLogin, handleAuth, logout } from "./pages/auth.js";
+
 import { onFileChange, fil, changeProfile } from "./pages/profile_edit.js";
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation);
