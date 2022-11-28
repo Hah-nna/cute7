@@ -5,9 +5,9 @@ import { getPostList } from "./pages/cutemain.js";
 import { getProfileInfo, getProfilePostList } from "./pages/profile_edit.js";
 
 const routes = {
+  "/": "/pages/auth.html",
   404: "/pages/404.html",
   main: "/pages/main.html",
-  auth: "/pages/auth.html",
   poster: "/pages/poster.html",
   profile: "/pages/profile.html",
   profile_edit: "/pages/profile_edit.html",
@@ -18,6 +18,7 @@ const routes = {
 export const handleLocation = async () => {
   let path = window.location.hash.replace("#", "");
   const pathName = window.location.pathname;
+  const isLogin = authService.currentUser ? true : false;
 
   // Live Server를 index.html에서 오픈할 경우
   if (pathName === "/index.html") {
@@ -26,6 +27,14 @@ export const handleLocation = async () => {
   // "http://example.com/"가 아니라 도메인 뒤에 / 없이 "http://example.com" 으로 나오는 경우
   if (path.length === 0) {
     path = "/";
+  }
+
+  if (path === "/") {
+    if (isLogin) {
+      path = "main";
+    } else {
+      path = "/";
+    }
   }
 
   const route = routes[path] || routes[404]; // truthy 하면 route[path], falsy 하면 routes[404]
@@ -58,7 +67,7 @@ export const handleLocation = async () => {
 };
 
 export const goToMain = () => {
-  window.location.hash = "#main";
+  window.location.hash = "";
 };
 export const goToProfile = () => {
   window.location.hash = "#profile";

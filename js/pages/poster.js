@@ -2,8 +2,6 @@ import { doc, getDoc, getDocs, collection, query, where, deleteDoc, updateDoc, s
 import { authService, dbService } from "../firebase.js";
 import { getYYYYMMDD } from "../util.js";
 
-const testUid = "dYJBEhst3GYk8edYSjy4DhKQp2s2";
-
 export const getUserProfile = async (uid) => {
   try {
     const docRef = doc(dbService, "profile", uid);
@@ -31,8 +29,9 @@ export const getPosterInfo = async () => {
       const { title, content, image, userId, createdAt } = docSnap.data();
       const { nickName, babyName, profileImage } = await getUserProfile(userId);
 
-      const uid = authService.currentUser?.uid || testUid; //test
-      const userProfileImage = getUserProfile(uid).profileImage;
+      const uid = authService.currentUser.uid;
+      const userProfile = await getUserProfile(uid);
+      const userProfileImage = userProfile.profileImage;
 
       if (userProfileImage) document.getElementById("comment-user-img").src = userProfileImage;
       if (image) document.getElementById("post-img").style.backgroundImage = `url(${image})`;
@@ -104,22 +103,25 @@ export const getCommentList = async () => {
       const commentId = doc.id;
       const { userId, postId, content, createdAt } = doc.data();
       const { profileImage, nickName } = await getUserProfile(userId);
-      const temp_html = `<div class="comment-wrapper">
-                            <img class="comment-profile" src="${profileImage}" />
+      let temp_html = `<div class="comment-wrapper">
+                            <img class="comment-profile" src="${profileImage || "../assets/blankProfile.webp"}" : } />
                             <div class="comment-items">
                               <div class="comment-header">
                                 <div class="comment-info">
-                                  <div class="comment-nickname">${nickName}</div>
+                                  <div class="comment-nickname">${nickName || "닉네임 없음"}</div>
                                   <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
                                 </div>
-                                <div class="comment-btns">
-                                  <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
-                                  <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="36" height="36" />
-                                </div>
-                              </div>
-                              <div class="comment-contents">${content}</div>
-                            </div>
-                          </div>`;
+                                `;
+      if (userId === authService.currentUser.uid) {
+        temp_html += `<div class="comment-btns">
+                        <img class="comment-btn" onclick="editComment('${commentId}');" src="../assets/edit.png" width="36" height="36" />
+                        <img class="comment-btn" onclick="deleteComment('${commentId}');" src="../assets/delete.png" width="36" height="36" />
+                      </div>`;
+      }
+      temp_html += `</div>
+                    <div class="comment-contents">${content}</div>
+                  </div>
+                </div>`;
 
       const div = document.createElement("div");
       div.innerHTML = temp_html;

@@ -67,7 +67,6 @@ export const handleAuth = (event) => {
 
   // 유효성 검사 통과 후 로그인 또는 회원가입 API 요청
   const authBtnText = document.querySelector("#authBtn").value;
-  console.log(authBtnText);
   if (authBtnText === "로그인하개🐕") {
     // 유효성검사 후 로그인 성공 시 팬명록 화면으로
 
@@ -76,7 +75,7 @@ export const handleAuth = (event) => {
         // Signed in
         const user = userCredential.user;
         await createProfile(user);
-        window.location.hash = "#main";
+        window.location.hash = "";
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -139,9 +138,8 @@ export const socialLogin = async (event) => {
       const docSnap = await getDoc(docRef);
       if (!docSnap.exists()) {
         await createProfile(uid);
-        console.log(uid);
       }
-      window.location.hash = "#main";
+      window.location.hash = "";
     })
     .catch((error) => {
       // Handle Errors here.

@@ -17,14 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     handleLocation();
     const hash = window.location.hash;
 
-    if (user) {
-      // 로그인 상태인 경우
-      if (hash === "") {
-        window.location.replace("#main");
+    if (!user) {
+      // 로그아웃 상태이므로 로그인 화면으로 강제 이동
+      if (hash !== "") {
+        window.location.replace("");
       }
-    } else {
-      // 로그아웃 상태인 경우
-      window.location.replace("#auth");
     }
   });
 });
