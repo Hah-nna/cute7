@@ -103,13 +103,14 @@ export const getCommentList = async () => {
     querySnapShot.forEach(async (doc) => {
       const commentId = doc.id;
       const { userId, postId, content, createdAt } = doc.data();
+      console.log(authService.currentUser.uid);
       const { profileImage, nickName } = await getUserProfile(userId);
       let temp_html = `<div class="comment-wrapper">
-                            <img class="comment-profile" src="${profileImage}" />
+                            <img class="comment-profile" src="${profileImage || "../assets/blankProfile.webp"}" : } />
                             <div class="comment-items">
                               <div class="comment-header">
                                 <div class="comment-info">
-                                  <div class="comment-nickname">${nickName}</div>
+                                  <div class="comment-nickname">${nickName || "닉네임 없음"}</div>
                                   <div class="comment-date">${getYYYYMMDD(createdAt)}</div>
                                 </div>
                                 `;
