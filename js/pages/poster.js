@@ -33,8 +33,6 @@ export const getPosterInfo = async () => {
       const userProfile = await getUserProfile(uid);
       const userProfileImage = userProfile.profileImage;
 
-      console.log(userProfileImage);
-
       if (userProfileImage) document.getElementById("comment-user-img").src = userProfileImage;
       if (image) document.getElementById("post-img").style.backgroundImage = `url(${image})`;
       if (nickName) document.getElementById("post-nickname").textContent = nickName;
